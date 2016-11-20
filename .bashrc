@@ -1,8 +1,9 @@
 [[ ${HOME} == /Users/* ]] && alias ls='ls -G' || alias ls='ls -ph --color=auto'
+alias ll='ls -alFh'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-eval `dircolors`
+eval $(SHELL=bash $(type -p dircolors))
 declare PROMPT_COMMAND="history -a;history -r"
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 export HISTCONTROL=ignoredups
