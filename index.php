@@ -410,6 +410,25 @@ if ($_GET['act'] == "cpu")
   echo $_GET['callback'],'(',$jarr,')';
   exit;
 }
+
+//调用ipip.net取得IP位置
+if ($_GET['act'] == "iploc")
+{
+  $ip = $_SERVER['REMOTE_ADDR'];
+
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, "http://freeapi.ipip.net/". $ip);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+  curl_setopt($ch,CURLOPT_USERAGENT, "curl/7.47.0");
+  $result = curl_exec($ch);
+  curl_close($ch);
+
+  $jarr=$result;
+  $_GET['callback'] = htmlspecialchars($_GET['callback']);
+  echo $_GET['callback'],'(',$jarr,')';
+  exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -547,6 +566,7 @@ function displayData(dataJSON)
   $("#NetInputSpeed4").html(ForDight((dataJSON.NetInputSpeed4-InputSpeed4),3)); InputSpeed4=dataJSON.NetInputSpeed4;
   $("#NetInputSpeed5").html(ForDight((dataJSON.NetInputSpeed5-InputSpeed5),3)); InputSpeed5=dataJSON.NetInputSpeed5;
 }
+
 $(document).ready(function(){getCPUJSONData();});
 function getCPUJSONData()
 {
@@ -574,6 +594,16 @@ function displayCPUData(dataJSON)
   else
     $("#barcpuPercent").width(usage+'%').removeClass().addClass('barli_green');
 }
+
+$(document).ready(function(){
+  $.getJSON('?act=iploc&callback=?', displayIPLocData);
+});
+
+function displayIPLocData(dataJSON)
+{
+  $("#iploc").html(dataJSON.join(' ').replace(/\s+/g, ' '));
+}
+
 -->
 </script>
 </head>
@@ -598,7 +628,7 @@ function displayCPUData(dataJSON)
   <tr><th colspan="4">服务器参数</th></tr>
   <tr>
     <td>服务器域名/IP地址</td>
-    <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php if('/'==DIRECTORY_SEPARATOR){echo $_SERVER['SERVER_ADDR'];}else{echo @gethostbyname($_SERVER['SERVER_NAME']);} ?>)&nbsp;&nbsp;你的IP地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?></td>
+    <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php if('/'==DIRECTORY_SEPARATOR){echo $_SERVER['SERVER_ADDR'];}else{echo @gethostbyname($_SERVER['SERVER_NAME']);} ?>)&nbsp;&nbsp;你的IP地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>) </td>
   </tr>
   <tr>
     <td>服务器标识</td>
@@ -667,7 +697,7 @@ function displayCPUData(dataJSON)
       <font id="cpuIRQ">0.0</font> irq, 
       <font id="cpuSOFTIRQ">0.0</font> softirq, 
       <font id="cpuSTEAL">0.0</font> steal 
-      <div class="bar"><div id="barcpuPercent" class="barli_green" style="width: 100%;">&nbsp;</div> </div>
+      <div class="bar"><div id="barcpuPercent" class="barli_green" style="width: 1px;">&nbsp;</div> </div>
     </td>
   </tr>
   <tr>
