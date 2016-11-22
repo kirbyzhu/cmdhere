@@ -648,7 +648,7 @@ function displayIPLocData(dataJSON)
   </tr>
   <tr>
     <td width="13%">服务器操作系统</td>
-    <td width="37%"><?php $release_info = parse_ini_file("/etc/lsb-release"); echo $release_info["DISTRIB_DESCRIPTION"];?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
+    <td width="37%"><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
     <td width="13%">服务器解译引擎</td>
     <td width="37%"><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
   </tr>
