@@ -10,6 +10,8 @@ $version = "v1.0"; //版本号
 
 define('HTTP_HOST', preg_replace('~^www\.~i', '', $_SERVER['HTTP_HOST']));
 
+$_SERVER['REMOTE_ADDR'] = isset($_SERVER["HTTP_X_REAL_IP"])?$_SERVER["HTTP_X_REAL_IP"]:$_SERVER['REMOTE_ADDR'];
+
 $time_start = microtime_float();
 
 function memory_usage()
