@@ -818,7 +818,7 @@ if($sysInfo['swapTotal']>0)
 <?php if ('0x2' == $info[2] && !isset($seen[$info[3]])) : ?>
 <?php $seen[$info[3]] = true; ?>
      <tr>
-        <td width="13%"><?php echo gethostbyaddr($info[0]);?> </td>
+        <td width="13%"><?php echo $info[0];?> </td>
         <td width="29%">MAC: <font color='#CC0000'><?php  echo $info[3];?></font></td>
         <td width="14%">类型: <font color='#CC0000'><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
         <td width="29%">接口: <font color='#CC0000'><?php echo $info[5];?></font></td>
