@@ -1,4 +1,11 @@
 <?php
+if ($_SERVER['HTTP_REFERER'] != '' && parse_url($_SERVER['HTTP_REFERER'])['host'] != $_SERVER['HTTP_HOST'])
+{
+   header("location: https://github.com/phuslu");
+   exit(0);
+}
+
+
 //ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 error_reporting(0); //抑制所有错误信息
 @header("content-Type: text/html; charset=utf-8"); //语言强制
