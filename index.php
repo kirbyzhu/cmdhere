@@ -285,34 +285,34 @@ function sys_linux()
   $res['swapPercent'] = (floatval($res['swapTotal'])!=0)?round($res['swapUsed']/$res['swapTotal']*100,2):0;
 
   // LOAD Board
-  if (glob("/sys/devices/virtual/dmi/id/board_name")) {
+  if (is_file("/sys/devices/virtual/dmi/id/board_name")) {
       $res['boardVendor'] = file('/sys/devices/virtual/dmi/id/board_vendor')[0];
       $res['boardName'] = file('/sys/devices/virtual/dmi/id/board_name')[0];
       $res['boardVersion'] = file('/sys/devices/virtual/dmi/id/board_version')[0];
-  } else if (glob("/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer")) {
+  } else if (is_file("/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer")) {
       $res['boardVendor'] = file('/sys/devices/virtual/android_usb/android0/f_rndis/manufacturer')[0];
       $res['boardName'] = '';
       $res['boardVersion'] = '';
   }
 
   // LOAD BIOS
-  if (glob("/sys/devices/virtual/dmi/id/bios_vendor")) {
+  if (is_file("/sys/devices/virtual/dmi/id/bios_vendor")) {
       $res['BIOSVendor'] = file('/sys/devices/virtual/dmi/id/bios_vendor')[0];
       $res['BIOSVersion'] = file('/sys/devices/virtual/dmi/id/bios_version')[0];
       $res['BIOSDate'] = file('/sys/devices/virtual/dmi/id/bios_date')[0];
-  } else if (glob("/sys/devices/virtual/android_usb/android0/iProduct")) {
+  } else if (is_file("/sys/devices/virtual/android_usb/android0/iProduct")) {
       $res['BIOSVendor'] = file('/sys/devices/virtual/android_usb/android0/iManufacturer')[0];
       $res['BIOSVersion'] = file('/sys/devices/virtual/android_usb/android0/iProduct')[0];
       $res['BIOSDate'] = '';
   }
 
   // LOAD DISK
-  if (glob("/sys/class/block/s*/device/model")) {
-      $res['diskModel'] = file(glob("/sys/class/block/s*/device/model")[0])[0];
-      $res['diskVendor'] = file(glob("/sys/class/block/s*/device/vendor")[0])[0];
-  } else if (glob("/sys/class/block/mmc*/device/type")) {
-      $res['diskModel'] = file(glob("/sys/class/block/mmc*/device/name")[0])[0];
-      $res['diskVendor'] = file(glob("/sys/class/block/mmc*/device/type")[0])[0];
+  if ($dirs=glob("/sys/class/block/s*")) {
+      $res['diskModel'] = file($dirs[0]."/device/model")[0];
+      $res['diskVendor'] = file($dirs[0]."/device/vendor")[0];
+  } else if ($dirs=glob("/sys/class/block/mmc*")) {
+      $res['diskModel'] = file($dirs[0]."/device/name")[0];
+      $res['diskVendor'] = file($dirs[0]."/device/type")[0];
   }
 
   // LOAD AVG
