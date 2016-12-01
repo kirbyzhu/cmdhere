@@ -457,6 +457,7 @@ if ($_GET['act'] == "iploc")
 <title><?php echo $_SERVER['SERVER_NAME']; ?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow"> 
 <!-- Powered by: Yahei.Net -->
 <style type="text/css">
 <!--
@@ -628,6 +629,7 @@ function displayIPLocData(dataJSON)
 -->
 </script>
 </head>
+
 <body>
 
 <a name="w_top"></a>
