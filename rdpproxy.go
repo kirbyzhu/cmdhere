@@ -5,8 +5,21 @@ import (
 	"io"
 	"net"
 	"os/exec"
+	"sync"
 
 	"github.com/phuslu/glog"
+)
+
+const (
+	BUFSZ = 256 * 1024
+)
+
+var (
+	bufpool = sync.Pool{
+		New: func() interface{} {
+			return make([]byte, BUFSZ)
+		},
+	}
 )
 
 func forward(lconn net.Conn, raddr string) {
@@ -23,14 +36,18 @@ func forward(lconn net.Conn, raddr string) {
 
 	glog.Infof("forward %+v to %+v", lconn.RemoteAddr(), rconn.RemoteAddr())
 	go func() {
+		buf := bufpool.Get().([]byte)
+		defer bufpool.Put(buf)
 		defer rconn.Close()
 		defer lconn.Close()
-		io.Copy(rconn, lconn)
+		io.CopyBuffer(rconn, lconn, buf)
 	}()
 	go func() {
+		buf := bufpool.Get().([]byte)
+		defer bufpool.Put(buf)
 		defer lconn.Close()
 		defer rconn.Close()
-		io.Copy(lconn, rconn)
+		io.CopyBuffer(lconn, rconn, buf)
 	}()
 }
 
