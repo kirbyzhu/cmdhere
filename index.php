@@ -438,15 +438,28 @@ if ($_GET['act'] == "iploc")
   $ip = $_SERVER['REMOTE_ADDR'];
 
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, "http://freeapi.ipip.net/". $ip);
+  curl_setopt($ch, CURLOPT_URL, "https://www.ipip.net/ip.html");
+  curl_setopt($ch, CURLOPT_REFERER, "https://www.ipip.net/ip.html");
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-  curl_setopt($ch,CURLOPT_USERAGENT, "curl/7.47.0");
+  curl_setopt($ch, CURLOPT_USERAGENT, "curl/7.47.0");
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, "ip=".$ip);
   $result = curl_exec($ch);
   curl_close($ch);
 
-  $jarr=$result;
+  $jarr = array();
+  if (preg_match("/<span id=\"myself\">\s*(.+?)\s*</", $result, $matches))
+  {
+    array_push($jarr, $matches[1]);
+  }
+  preg_match_all("/<td>(.+?)<\/td>/", $result, $matches);
+  if (count($matches) > 1)
+  {
+    array_push($jarr, end($matches[1]));
+  }
+
   $_GET['callback'] = htmlspecialchars($_GET['callback']);
-  echo $_GET['callback'],'(',$jarr,')';
+  echo $_GET['callback'],'(',json_encode($jarr),')';
   exit;
 }
 
@@ -623,7 +636,11 @@ $(document).ready(function(){
 
 function displayIPLocData(dataJSON)
 {
-  $("#iploc").html(dataJSON.join(' ').replace(/\s+/g, ' '));
+  if (dataJSON[1] != null && dataJSON[1].substring(0,4) == dataJSON[0].substring(0,4)) {
+    $("#iploc").html(dataJSON[1] + dataJSON[0].replace(/^\S+/, ''));
+  } else {
+    $("#iploc").html(dataJSON[0]);
+  }
 }
 
 -->
@@ -640,7 +657,6 @@ function displayIPLocData(dataJSON)
   <tr>
     <th class="w_logo">PHP探针</th>
     <th class="w_top"><a href="/files/">文件下载</a></th>
-    <th class="w_top"><a href="/wol/">远程唤醒</a></th>
     <th class="w_top"><a href="/admin/">路由管理</a></th>
     <th class="w_top"><a href="/shell/">Shell in a box</a></th>
   </tr>
