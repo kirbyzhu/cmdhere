@@ -474,36 +474,36 @@ if ($_GET['act'] == "iploc")
 <!-- Powered by: Yahei.Net -->
 <style type="text/css">
 <!--
-* {font-family: "Microsoft Yahei",Tahoma, Arial; }
-body{text-align: center; margin: 0 auto; padding: 0; background-color:#fafafa;font-size:12px;font-family:Tahoma, Arial}
-h1 {font-size: 26px; padding: 0; margin: 0; color: #333333; font-family: "Lucida Sans Unicode","Lucida Grande",sans-serif;}
+* {font-family: Tahoma, "Microsoft Yahei", Arial; }
+body{text-align: center; margin: 0 auto; padding: 0; background-color:#FFFFFF;font-size:12px;font-family:Tahoma, Arial}
+h1 {font-size: 26px; font-weight: normal; padding: 0; margin: 0; color: #444444;}
 h1 small {font-size: 11px; font-family: Tahoma; font-weight: bold; }
-a{color: #666; text-decoration:none;}
+a{color: #000000; text-decoration:none;}
 a.black{color: #000000; text-decoration:none;}
-table{width:100%;clear:both;padding: 0; margin: 0 0 10px;border-collapse:collapse; border-spacing: 0;
-box-shadow: 1px 1px 1px #CCC;
--moz-box-shadow: 1px 1px 1px #CCC;
--webkit-box-shadow: 1px 1px 1px #CCC;
--ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CCCCCC')";}
-th{padding: 3px 6px; font-weight:bold;background:#dedede;color:#626262;border:1px solid #cccccc; text-align:left;}
-tr{padding: 0; background:#FFFFFF;}
+b{color: #999999;}
+table{width:100%; clear:both;padding: 0; margin: 0 0 10px;border-collapse:collapse; border-spacing: 0;}
+th{padding: 3px 6px; font-weight:bold;background:#3066a6;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
+.th_1{padding: 3px 6px; font-weight:bold;background:#666699;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
+.th_2{padding: 3px 6px; font-weight:bold;background:#417291;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
+.th_3{padding: 3px 6px; font-weight:bold;background:#067201;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
+.th_4{padding: 3px 6px; font-weight:bold;background:#666666;color:#FFFFFF;border:1px solid #CCCCCC; text-align:left;}
+.th_5{padding: 3px 6px; font-weight:bold;background:#333333;color:#FFFFFF;border:1px solid #CCCCCC; text-align:left;}
+.th_6{padding: 3px 6px; font-weight:bold;background:#FF6600;color:#FFFFFF;border:1px solid #FF6600; text-align:left;}
+tr{padding: 0; background:#F7F7F7;}
 td{padding: 3px 6px; border:1px solid #CCCCCC;}
-.w_logo{height:25px;text-align:center;color:#333;FONT-SIZE: 15px; width:13%; }
-.w_top{height:25px;text-align:center; width:8.7%;}
-.w_top:hover{background:#dadada;}
-.w_foot{height:25px;text-align:center; background:#dedede;}
 input{padding: 2px; background: #FFFFFF; border-top:1px solid #666666; border-left:1px solid #666666; border-right:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; font-size:12px}
 input.btn{font-weight: bold; height: 20px; line-height: 20px; padding: 0 6px; color:#666666; background: #f2f2f2; border:1px solid #999;font-size:12px}
-.bar {border:1px solid #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px; overflow: hidden;}
-.bar_1 {border:1px dotted #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px; overflow: hidden;}
+.bar {border:1px solid #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
+.bar_1 {border:1px dotted #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
 .barli_red{background:#ff6600; height:5px; margin:0px; padding:0;}
 .barli_blue{background:#0099FF; height:5px; margin:0px; padding:0;}
 .barli_green{background:#36b52a; height:5px; margin:0px; padding:0;}
 .barli_black{background:#333; height:5px; margin:0px; padding:0;}
 .barli_1{background:#999999; height:5px; margin:0px; padding:0;}
 .barli{background:#36b52a; height:5px; margin:0px; padding:0;}
-#page {width: 960px; padding: 0 auto; margin: 0 auto; text-align: left;}
-#header{position:relative; padding:5px;}
+#page {width: 920px; padding: 0 20px; margin: 0 auto; text-align: left;}
+#header{position: relative; padding: 10px;}
+#footer {padding: 15px 0; text-align: center; font-size: 11px; font-family: Tahoma, Verdana;}
 .w_small{font-family: Courier New;}
 .w_number{color: #f800fe;}
 .sudu {padding: 0; background:#5dafd1; }
@@ -652,7 +652,7 @@ function displayIPLocData(dataJSON)
 <a name="w_top"></a>
 
 <div id="page">
-
+<!--
 <table>
   <tr>
     <th class="w_logo">PHP探针</th>
@@ -661,6 +661,7 @@ function displayIPLocData(dataJSON)
     <th class="w_top"><a href="/shell/">Shell in a box</a></th>
   </tr>
 </table>
+-->
 
 <!--服务器相关参数-->
 <table>
