@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['HTTP_REFERER'] != '' && parse_url($_SERVER['HTTP_REFERER'])['host'] != $_SERVER['HTTP_HOST'])
+if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '' && parse_url($_SERVER['HTTP_REFERER'])['host'] != $_SERVER['HTTP_HOST'])
 {
    header("location: https://github.com/phuslu");
    exit(0);
