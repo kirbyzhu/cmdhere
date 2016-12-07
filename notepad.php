@@ -63,34 +63,48 @@ if (isset($_POST['t'])) {
     <title><?php print $name; ?></title>
     <link href="data:image/x-icon;base64,R0lGODlhEAAQAKIGAL7FzEBUaLK5wnOBkJCbp9nd4f///wAAACH5BAEAAAYALAAAAAAQABAAAANJaKrR7msFMga1o8UguvcBECyDUJ1lJjIdWgrharxfG49cDQL8SNeqXk4H4/V+n2BB9GjGjCOJcQrdUHmFZZRxnW4NzyvhC3ZCEgA7" rel="icon" type="image/x-icon" />
     <style type="text/css">
-        body {
-            margin: 0;
-            background: #ebeef1;
-        }
+body {
+    margin: 0;
+    background: #ebeef1;
+}
 
-        #content {
-            font-size: 100%;
-            margin: 0;
-            padding: 20px;
-            overflow-y: auto;
-            resize: none;
-            width: 100%;
-            height: 100%;
-            min-height: 100%;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            border: 1px #ddd solid;
-            outline: none;
-        }
+#content {
+    font-size: 100%;
+    margin: 0;
+    padding: 20px;
+    overflow-y: auto;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px #ddd solid;
+    outline: none;
+}
 
-        .container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            bottom: 20px;
-            left: 20px;
-        }
+.container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+}
+
+#printable {
+    display: none;
+}
+
+@media print {
+    #content {
+        display: none;
+    }
+
+    #printable {
+        display: block;
+    }
+} 
     </style>
 </head>
 <body>
@@ -100,34 +114,59 @@ if (isset($_POST['t'])) {
                 print htmlspecialchars(file_get_contents($path), ENT_QUOTES, 'UTF-8');
             }
 ?></textarea>
+    <pre id="printable"></pre>
     </div>
     <script>
-        function uploadContent() {
-            if (content !== textarea.value) {
-                var temp = textarea.value;
-                var request = new XMLHttpRequest();
-                request.open('POST', window.location.href, true);
-                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-                request.onload = function() {
-                    if (request.readyState === 4) {
-                        content = temp;
-                        setTimeout(uploadContent, 1000);
-                    }
-                }
-                request.onerror = function() {
-                    setTimeout(uploadContent, 1000);
-                }
-                request.send("t=" + encodeURIComponent(temp));
-            }
-            else {
+function uploadContent() {
+
+    if (content !== textarea.value) {
+
+        // Text area value has changed.
+        var temp = textarea.value;
+        var request = new XMLHttpRequest();
+        request.open('POST', window.location.href, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+        request.onload = function() {
+
+            if (request.readyState === 4) {
+
+                // Request has ended, check again after 1 second.
+                content = temp;
                 setTimeout(uploadContent, 1000);
             }
         }
 
-        var textarea = document.getElementById('content');
-        var content = textarea.value;
-        textarea.focus();
-        uploadContent();
+        request.onerror = function() {
+
+            // On connection error, try again after 1 second.
+            setTimeout(uploadContent, 1000);
+        }
+
+        // Send the request.
+        request.send("t=" + encodeURIComponent(temp));
+
+        // Make the content available to print.
+        printable.removeChild(printable.firstChild);
+        printable.appendChild(document.createTextNode(temp));
+    }
+    else {
+
+        // Content has not changed, check again after 1 second.
+        setTimeout(uploadContent, 1000);
+    }
+}
+
+var textarea = document.getElementById('content');
+var printable = document.getElementById('printable');
+var content = textarea.value;
+
+// Make the content available to print.
+printable.appendChild(document.createTextNode(content));
+
+textarea.focus();
+
+uploadContent();
     </script>
 </body>
 </html>
