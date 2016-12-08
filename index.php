@@ -855,47 +855,52 @@ if($sysInfo['swapTotal']>0)
 <?php endif; ?>
 
 <?php
-$events = array();
-$i = 0;
-$lines = str_split(file_get_contents('/var/log/wtmp'), 384);
-foreach ($lines as $line)
+function get_logon_events()
 {
-  preg_match('/(.{4})(.{4})(.{32})(.{4})(.{32})(.{256})(.{4})(.{4})(.{4})(.{4})(.{4})/', $line, $matches);
-  $events[$i] = array();
-  $events[$i]['type'] = unpack('I', $matches[1])[1];
-  $events[$i]['pid'] = unpack('I', $matches[2])[1];
-  $events[$i]['line'] = trim($matches[3]);
-  $events[$i]['inittab'] = $matches[4];
-  $events[$i]['user'] = trim($matches[5]);
-  $events[$i]['host'] = trim($matches[6]);
-  $events[$i]['t1'] = $matches[7];
-  $events[$i]['t2'] = $matches[8];
-  $events[$i]['gmtime'] = unpack('I', $matches[9])[1];
-  $events[$i]['t4'] = $matches[10];
-  $events[$i]['t5'] = $matches[11];
-  $i++;
-}
-$events2 = array();
-foreach ($events as $event)
-{
-  if ($event['user'] == '')
-     continue;
-  switch ($event['type'])
+  $events = array();
+  $i = 0;
+  $lines = str_split(file_get_contents('/var/log/wtmp'), 384);
+  foreach ($lines as $line)
   {
-  case 7:
-    $events2[$event['line']] = $event;
-    break;
-  case 8:
-    unset($events2[$event['line']]);
-    break;
+    preg_match('/(.{4})(.{4})(.{32})(.{4})(.{32})(.{256})(.{4})(.{4})(.{4})(.{4})(.{4})/', $line, $matches);
+    $events[$i] = array();
+    $events[$i]['type'] = unpack('I', $matches[1])[1];
+    $events[$i]['pid'] = unpack('I', $matches[2])[1];
+    $events[$i]['line'] = trim($matches[3]);
+    $events[$i]['inittab'] = $matches[4];
+    $events[$i]['user'] = trim($matches[5]);
+    $events[$i]['host'] = trim($matches[6]);
+    $events[$i]['t1'] = $matches[7];
+    $events[$i]['t2'] = $matches[8];
+    $events[$i]['gmtime'] = unpack('I', $matches[9])[1];
+    $events[$i]['t4'] = $matches[10];
+    $events[$i]['t5'] = $matches[11];
+    $i++;
   }
+  $events2 = array();
+  foreach ($events as $event)
+  {
+    if ($event['user'] == '')
+       continue;
+    switch ($event['type'])
+    {
+    case 7:
+      $events2[$event['line']] = $event;
+      break;
+    case 8:
+      unset($events2[$event['line']]);
+      break;
+    }
+  }
+  return $events2;
 }
 ?>
 
-<?php if (0 < count($events2)) : ?>
+<?php if (false) : ?>
+<?php if (0 < count(($events = get_logon_events()))) : ?>
 <table>
     <tr><th colspan="6">已登录用户</th></tr>
-<?php foreach ($events2 as $event ) : ?>
+<?php foreach ($events as $event ) : ?>
      <tr>
         <td width="15%"><?php echo $event['user'];?></td>
         <td width="15%">TTY: <font color='#CC0000'><?php echo $event['line'];?></font></td>
@@ -906,6 +911,7 @@ foreach ($events as $event)
     </tr>
 <?php endforeach; ?>
 </table>
+<?php endif; ?>
 <?php endif; ?>
 
 
