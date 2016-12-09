@@ -324,14 +324,6 @@ function sys_linux()
   return $res;
 }
 
-//比例条
-function bar($percent)
-{
-?>
-  <div class="bar"><div class="barli" style="width:<?php echo $percent?>%">&nbsp;</div></div>
-<?php
-}
-
 $uptime = $sysInfo['uptime']; //在线时间
 $stime = date('Y-m-d H:i:s'); //系统当前时间
 
@@ -397,7 +389,58 @@ for ($i = 2; $i < count($strs); $i++ )
 //ajax调用实时刷新
 if ($_GET['act'] == "rt")
 {
-  $arr=array('useSpace'=>"$du",'freeSpace'=>"$df",'hdPercent'=>"$hdPercent",'barhdPercent'=>"$hdPercent%",'TotalMemory'=>"$mt",'UsedMemory'=>"$mu",'FreeMemory'=>"$mf",'CachedMemory'=>"$mc",'Buffers'=>"$mb",'TotalSwap'=>"$st",'swapUsed'=>"$su",'swapFree'=>"$sf",'loadAvg'=>"$load",'uptime'=>"$uptime",'freetime'=>"$freetime",'bjtime'=>"$bjtime",'stime'=>"$stime",'memRealPercent'=>"$memRealPercent",'memRealUsed'=>"$memRealUsed",'memRealFree'=>"$memRealFree",'memPercent'=>"$memPercent%",'memCachedPercent'=>"$memCachedPercent",'barmemCachedPercent'=>"$memCachedPercent%",'swapPercent'=>"$swapPercent",'barmemRealPercent'=>"$memRealPercent%",'barswapPercent'=>"$swapPercent%",'NetOut2'=>"$NetOut[2]",'NetOut3'=>"$NetOut[3]",'NetOut4'=>"$NetOut[4]",'NetOut5'=>"$NetOut[5]",'NetOut6'=>"$NetOut[6]",'NetOut7'=>"$NetOut[7]",'NetOut8'=>"$NetOut[8]",'NetOut9'=>"$NetOut[9]",'NetOut10'=>"$NetOut[10]",'NetInput2'=>"$NetInput[2]",'NetInput3'=>"$NetInput[3]",'NetInput4'=>"$NetInput[4]",'NetInput5'=>"$NetInput[5]",'NetInput6'=>"$NetInput[6]",'NetInput7'=>"$NetInput[7]",'NetInput8'=>"$NetInput[8]",'NetInput9'=>"$NetInput[9]",'NetInput10'=>"$NetInput[10]",'NetOutSpeed2'=>"$NetOutSpeed[2]",'NetOutSpeed3'=>"$NetOutSpeed[3]",'NetOutSpeed4'=>"$NetOutSpeed[4]",'NetOutSpeed5'=>"$NetOutSpeed[5]",'NetInputSpeed2'=>"$NetInputSpeed[2]",'NetInputSpeed3'=>"$NetInputSpeed[3]",'NetInputSpeed4'=>"$NetInputSpeed[4]",'NetInputSpeed5'=>"$NetInputSpeed[5]");
+  $arr=array('useSpace'=>"$du",
+             'freeSpace'=>"$df",
+             'hdPercent'=>"$hdPercent",
+             'barhdPercent'=>"$hdPercent%",
+             'TotalMemory'=>"$mt",
+             'UsedMemory'=>"$mu",
+             'FreeMemory'=>"$mf",
+             'CachedMemory'=>"$mc",
+             'Buffers'=>"$mb",
+             'TotalSwap'=>"$st",
+             'swapUsed'=>"$su",
+             'swapFree'=>"$sf",
+             'loadAvg'=>"$load",
+             'uptime'=>"$uptime",
+             'freetime'=>"$freetime",
+             'bjtime'=>"$bjtime",
+             'stime'=>"$stime",
+             'memRealPercent'=>"$memRealPercent",
+             'memRealUsed'=>"$memRealUsed",
+             'memRealFree'=>"$memRealFree",
+             'memPercent'=>"$memPercent%",
+             'memCachedPercent'=>"$memCachedPercent",
+             'barmemCachedPercent'=>"$memCachedPercent%",
+             'swapPercent'=>"$swapPercent",
+             'barmemRealPercent'=>"$memRealPercent%",
+             'barswapPercent'=>"$swapPercent%",
+             'NetOut2'=>"$NetOut[2]",
+             'NetOut3'=>"$NetOut[3]",
+             'NetOut4'=>"$NetOut[4]",
+             'NetOut5'=>"$NetOut[5]",
+             'NetOut6'=>"$NetOut[6]",
+             'NetOut7'=>"$NetOut[7]",
+             'NetOut8'=>"$NetOut[8]",
+             'NetOut9'=>"$NetOut[9]",
+             'NetOut10'=>"$NetOut[10]",
+             'NetInput2'=>"$NetInput[2]",
+             'NetInput3'=>"$NetInput[3]",
+             'NetInput4'=>"$NetInput[4]",
+             'NetInput5'=>"$NetInput[5]",
+             'NetInput6'=>"$NetInput[6]",
+             'NetInput7'=>"$NetInput[7]",
+             'NetInput8'=>"$NetInput[8]",
+             'NetInput9'=>"$NetInput[9]",
+             'NetInput10'=>"$NetInput[10]",
+             'NetOutSpeed2'=>"$NetOutSpeed[2]",
+             'NetOutSpeed3'=>"$NetOutSpeed[3]",
+             'NetOutSpeed4'=>"$NetOutSpeed[4]",
+             'NetOutSpeed5'=>"$NetOutSpeed[5]",
+             'NetInputSpeed2'=>"$NetInputSpeed[2]",
+             'NetInputSpeed3'=>"$NetInputSpeed[3]",
+             'NetInputSpeed4'=>"$NetInputSpeed[4]",
+             'NetInputSpeed5'=>"$NetInputSpeed[5]");
   $jarr=json_encode($arr);
   $_GET['callback'] = htmlspecialchars($_GET['callback']);
   echo $_GET['callback'],'(',$jarr,')';
@@ -440,7 +483,7 @@ if ($_GET['act'] == "iploc")
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "https://www.ipip.net/ip.html");
   curl_setopt($ch, CURLOPT_REFERER, "https://www.ipip.net/ip.html");
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_USERAGENT, "curl/7.47.0");
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, "ip=".$ip);
@@ -463,398 +506,7 @@ if ($_GET['act'] == "iploc")
   exit;
 }
 
-?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="robots" content="noindex, nofollow"> 
-<!-- Powered by: Yahei.Net -->
-<style type="text/css">
-<!--
-* {font-family: Tahoma, "Microsoft Yahei", Arial; }
-body{text-align: center; margin: 0 auto; padding: 0; background-color:#FFFFFF;font-size:12px;font-family:Tahoma, Arial}
-h1 {font-size: 26px; font-weight: normal; padding: 0; margin: 0; color: #444444;}
-h1 small {font-size: 11px; font-family: Tahoma; font-weight: bold; }
-a{color: #000000; text-decoration:none;}
-a.black{color: #000000; text-decoration:none;}
-b{color: #999999;}
-table{width:100%; clear:both;padding: 0; margin: 0 0 10px;border-collapse:collapse; border-spacing: 0;}
-th{padding: 3px 6px; font-weight:bold;background:#3066a6;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
-.th_1{padding: 3px 6px; font-weight:bold;background:#666699;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
-.th_2{padding: 3px 6px; font-weight:bold;background:#417291;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
-.th_3{padding: 3px 6px; font-weight:bold;background:#067201;color:#FFFFFF;border:1px solid #3066a6; text-align:left;}
-.th_4{padding: 3px 6px; font-weight:bold;background:#666666;color:#FFFFFF;border:1px solid #CCCCCC; text-align:left;}
-.th_5{padding: 3px 6px; font-weight:bold;background:#333333;color:#FFFFFF;border:1px solid #CCCCCC; text-align:left;}
-.th_6{padding: 3px 6px; font-weight:bold;background:#FF6600;color:#FFFFFF;border:1px solid #FF6600; text-align:left;}
-tr{padding: 0; background:#F7F7F7;}
-td{padding: 3px 6px; border:1px solid #CCCCCC;}
-input{padding: 2px; background: #FFFFFF; border-top:1px solid #666666; border-left:1px solid #666666; border-right:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; font-size:12px}
-input.btn{font-weight: bold; height: 20px; line-height: 20px; padding: 0 6px; color:#666666; background: #f2f2f2; border:1px solid #999;font-size:12px}
-.bar {border:1px solid #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
-.bar_1 {border:1px dotted #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
-.barli_red{background:#ff6600; height:5px; margin:0px; padding:0;}
-.barli_blue{background:#0099FF; height:5px; margin:0px; padding:0;}
-.barli_green{background:#36b52a; height:5px; margin:0px; padding:0;}
-.barli_black{background:#333; height:5px; margin:0px; padding:0;}
-.barli_1{background:#999999; height:5px; margin:0px; padding:0;}
-.barli{background:#36b52a; height:5px; margin:0px; padding:0;}
-#page {width: 920px; padding: 0 20px; margin: 0 auto; text-align: left;}
-#header{position: relative; padding: 10px;}
-#footer {padding: 15px 0; text-align: center; font-size: 11px; font-family: Tahoma, Verdana;}
-.w_small{font-family: Courier New;}
-.w_number{color: #f800fe;}
-.sudu {padding: 0; background:#5dafd1; }
-.suduk { margin:0px; padding:0;}
-.resYes{}
-.resNo{color: #FF0000;}
-.word{word-break:break-all;}
--->
-</style>
-<script src="//lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript">
-<!--
-$(document).ready(function(){getJSONData();});
-var OutSpeed2=<?php echo floor($NetOutSpeed[2]) ?>;
-var OutSpeed3=<?php echo floor($NetOutSpeed[3]) ?>;
-var OutSpeed4=<?php echo floor($NetOutSpeed[4]) ?>;
-var OutSpeed5=<?php echo floor($NetOutSpeed[5]) ?>;
-var InputSpeed2=<?php echo floor($NetInputSpeed[2]) ?>;
-var InputSpeed3=<?php echo floor($NetInputSpeed[3]) ?>;
-var InputSpeed4=<?php echo floor($NetInputSpeed[4]) ?>;
-var InputSpeed5=<?php echo floor($NetInputSpeed[5]) ?>;
-function getJSONData()
-{
-  setTimeout("getJSONData()", 1000);
-  $.getJSON('?act=rt&callback=?', displayData);
-}
-function ForDight(Dight,How)
-{
-  if (Dight<0){
-    var Last=0+"B/s";
-  }else if (Dight<1024){
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"B/s";
-  }else if (Dight<1048576){
-    Dight=Dight/1024;
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"K/s";
-  }else{
-    Dight=Dight/1048576;
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"M/s";
-  }
-  return Last;
-}
-function displayData(dataJSON)
-{
-  $("#useSpace").html(dataJSON.useSpace);
-  $("#freeSpace").html(dataJSON.freeSpace);
-  $("#hdPercent").html(dataJSON.hdPercent);
-  $("#barhdPercent").width(dataJSON.barhdPercent);
-  $("#TotalMemory").html(dataJSON.TotalMemory);
-  $("#UsedMemory").html(dataJSON.UsedMemory);
-  $("#FreeMemory").html(dataJSON.FreeMemory);
-  $("#CachedMemory").html(dataJSON.CachedMemory);
-  $("#Buffers").html(dataJSON.Buffers);
-  $("#TotalSwap").html(dataJSON.TotalSwap);
-  $("#swapUsed").html(dataJSON.swapUsed);
-  $("#swapFree").html(dataJSON.swapFree);
-  $("#swapPercent").html(dataJSON.swapPercent);
-  $("#loadAvg").html(dataJSON.loadAvg);
-  $("#uptime").html(dataJSON.uptime);
-  $("#freetime").html(dataJSON.freetime);
-  $("#stime").html(dataJSON.stime);
-  $("#bjtime").html(dataJSON.bjtime);
-  $("#memRealUsed").html(dataJSON.memRealUsed);
-  $("#memRealFree").html(dataJSON.memRealFree);
-  $("#memRealPercent").html(dataJSON.memRealPercent);
-  $("#memPercent").html(dataJSON.memPercent);
-  $("#barmemPercent").width(dataJSON.memPercent);
-  $("#barmemRealPercent").width(dataJSON.barmemRealPercent);
-  $("#memCachedPercent").html(dataJSON.memCachedPercent);
-  $("#barmemCachedPercent").width(dataJSON.barmemCachedPercent);
-  $("#barswapPercent").width(dataJSON.barswapPercent);
-  $("#NetOut2").html(dataJSON.NetOut2);
-  $("#NetOut3").html(dataJSON.NetOut3);
-  $("#NetOut4").html(dataJSON.NetOut4);
-  $("#NetOut5").html(dataJSON.NetOut5);
-  $("#NetOut6").html(dataJSON.NetOut6);
-  $("#NetOut7").html(dataJSON.NetOut7);
-  $("#NetOut8").html(dataJSON.NetOut8);
-  $("#NetOut9").html(dataJSON.NetOut9);
-  $("#NetOut10").html(dataJSON.NetOut10);
-  $("#NetInput2").html(dataJSON.NetInput2);
-  $("#NetInput3").html(dataJSON.NetInput3);
-  $("#NetInput4").html(dataJSON.NetInput4);
-  $("#NetInput5").html(dataJSON.NetInput5);
-  $("#NetInput6").html(dataJSON.NetInput6);
-  $("#NetInput7").html(dataJSON.NetInput7);
-  $("#NetInput8").html(dataJSON.NetInput8);
-  $("#NetInput9").html(dataJSON.NetInput9);
-  $("#NetInput10").html(dataJSON.NetInput10);
-  $("#NetOutSpeed2").html(ForDight((dataJSON.NetOutSpeed2-OutSpeed2),3)); OutSpeed2=dataJSON.NetOutSpeed2;
-  $("#NetOutSpeed3").html(ForDight((dataJSON.NetOutSpeed3-OutSpeed3),3)); OutSpeed3=dataJSON.NetOutSpeed3;
-  $("#NetOutSpeed4").html(ForDight((dataJSON.NetOutSpeed4-OutSpeed4),3)); OutSpeed4=dataJSON.NetOutSpeed4;
-  $("#NetOutSpeed5").html(ForDight((dataJSON.NetOutSpeed5-OutSpeed5),3)); OutSpeed5=dataJSON.NetOutSpeed5;
-  $("#NetInputSpeed2").html(ForDight((dataJSON.NetInputSpeed2-InputSpeed2),3)); InputSpeed2=dataJSON.NetInputSpeed2;
-  $("#NetInputSpeed3").html(ForDight((dataJSON.NetInputSpeed3-InputSpeed3),3)); InputSpeed3=dataJSON.NetInputSpeed3;
-  $("#NetInputSpeed4").html(ForDight((dataJSON.NetInputSpeed4-InputSpeed4),3)); InputSpeed4=dataJSON.NetInputSpeed4;
-  $("#NetInputSpeed5").html(ForDight((dataJSON.NetInputSpeed5-InputSpeed5),3)); InputSpeed5=dataJSON.NetInputSpeed5;
-}
-
-$(document).ready(function(){getCPUJSONData();});
-function getCPUJSONData()
-{
-  setTimeout("getCPUJSONData()", 2000);
-  $.getJSON('?act=cpu&callback=?', displayCPUData);
-}
-function displayCPUData(dataJSON)
-{
-  $("#cpuUSER").html(dataJSON.user.toFixed(1));
-  $("#cpuSYS").html(dataJSON.sys.toFixed(1));
-  $("#cpuNICE").html(dataJSON.nice.toFixed(1));
-  $("#cpuIDLE").html(dataJSON.idle.toFixed(1).substring(0,4));
-  $("#cpuIOWAIT").html(dataJSON.iowait.toFixed(1));
-  $("#cpuIRQ").html(dataJSON.irq.toFixed(1));
-  $("#cpuSOFTIRQ").html(dataJSON.softirq.toFixed(1));
-  $("#cpuSTEAL").html(dataJSON.steal.toFixed(1));
-  
-  usage = 100 - (dataJSON.idle+dataJSON.iowait);
-  if (usage > 75)
-    $("#barcpuPercent").width(usage+'%').removeClass().addClass('barli_black');
-  else if (usage > 50)
-    $("#barcpuPercent").width(usage+'%').removeClass().addClass('barli_red');
-  else if (usage > 25)
-    $("#barcpuPercent").width(usage+'%').removeClass().addClass('barli_blue');
-  else
-    $("#barcpuPercent").width(usage+'%').removeClass().addClass('barli_green');
-}
-
-$(document).ready(function(){
-  $.getJSON('?act=iploc&callback=?', displayIPLocData);
-});
-
-function displayIPLocData(dataJSON)
-{
-  if (dataJSON[1] != null && dataJSON[1].substring(0,4) == dataJSON[0].substring(0,4)) {
-    $("#iploc").html(dataJSON[1] + dataJSON[0].replace(/^\S+/, ''));
-  } else {
-    $("#iploc").html(dataJSON[0]);
-  }
-}
-
--->
-</script>
-</head>
-
-<body>
-
-<a name="w_top"></a>
-
-<div id="page">
-<!--
-<table>
-  <tr>
-    <th class="w_logo">PHP探针</th>
-    <th class="w_top"><a href="/files/">文件下载</a></th>
-    <th class="w_top"><a href="/admin/">路由管理</a></th>
-    <th class="w_top"><a href="/shell/">Shell in a box</a></th>
-  </tr>
-</table>
--->
-
-<!--服务器相关参数-->
-<table>
-  <tr><th colspan="4">服务器参数</th></tr>
-  <tr>
-    <td>服务器域名/IP地址</td>
-    <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的IP地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>) </td>
-  </tr>
-  <tr>
-    <td>服务器标识</td>
-    <td colspan="3"><?php if($sysInfo['win_n'] != ''){echo $sysInfo['win_n'];}else{echo @php_uname();};?></td>
-  </tr>
-  <tr>
-    <td width="13%">服务器操作系统</td>
-    <td width="37%"><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
-    <td width="13%">服务器解译引擎</td>
-    <td width="37%"><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
-  </tr>
-  <tr>
-    <td>服务器语言</td>
-    <td><?php echo getenv("HTTP_ACCEPT_LANGUAGE");?></td>
-    <td>服务器端口</td>
-    <td><?php echo $_SERVER['SERVER_PORT'];?></td>
-  </tr>
-  <tr>
-    <td>服务器主机名</td>
-    <td><?php if('/'==DIRECTORY_SEPARATOR ){echo $os[1];}else{echo $os[2];} ?></td>
-    <td>绝对路径</td>
-    <td><?php echo $_SERVER['DOCUMENT_ROOT']?str_replace('\\','/',$_SERVER['DOCUMENT_ROOT']):str_replace('\\','/',dirname(__FILE__));?></td>
-  </tr>
-  <tr>
-    <td>管理员邮箱</td>
-    <td><?php echo $_SERVER['SERVER_ADMIN'];?></td>
-    <td>探针路径</td>
-    <td><?php echo str_replace('\\','/',__FILE__)?str_replace('\\','/',__FILE__):$_SERVER['SCRIPT_FILENAME'];?></td>
-  </tr>
-</table>
-
-<table>
-  <tr><th colspan="6">服务器实时数据</th></tr>
-  <tr>
-    <td width="13%" >服务器当前时间</td>
-    <td width="37%" ><span id="stime"><?php echo $stime;?></span></td>
-    <td width="13%" >服务器已运行时间</td>
-    <td width="37%" colspan="3"><span id="uptime"><?php echo $uptime;?></span></td>
-  </tr>
-  <tr>
-    <td width="13%">CPU型号 [<?php echo $sysInfo['cpu']['num'];?>核]</td>
-    <td width="87%" colspan="5"><?php echo $sysInfo['cpu']['model'];?></td>
-  </tr>
-<?php if (isset($sysInfo['boardVendor'])) : ?>
-  <tr>
-    <td width="13%">主板型号</td>
-    <td width="37%"><?php echo $sysInfo['boardVendor'] . " " . $sysInfo['boardName'] . " " . $sysInfo['boardVersion'];?></td>
-    <td width="13%">主板BIOS</td>
-    <td width="37%"><?php echo $sysInfo['BIOSVendor'] . " " . $sysInfo['BIOSVersion'] . " " . $sysInfo['BIOSDate'];?></td>
-  </tr>
-<?php endif; ?>
-<?php if (isset($sysInfo['diskModel'])) : ?>
-  <tr>
-    <td width="13%">硬盘型号</td>
-    <td width="87%" colspan="5"><?php echo $sysInfo['diskModel'] . " " . $sysInfo['diskVendor'];?></td>
-  </tr>
-<?php endif; ?>
-  <tr>
-    <td>CPU使用状况</td>
-    <td colspan="5">
-      <font id="cpuUSER" color="#CC0000">0.0</font> user, 
-      <font id="cpuSYS" color="#CC0000">0.0</font> sys, 
-      <font id="cpuNICE">0.0</font> nice, 
-      <font id="cpuIDLE" color="#CC0000">99.9</font> idle, 
-      <font id="cpuIOWAIT">0.0</font> iowait, 
-      <font id="cpuIRQ">0.0</font> irq, 
-      <font id="cpuSOFTIRQ">0.0</font> softirq, 
-      <font id="cpuSTEAL">0.0</font> steal 
-      <div class="bar"><div id="barcpuPercent" class="barli_green" style="width: 1px;">&nbsp;</div> </div>
-    </td>
-  </tr>
-  <tr>
-    <td>内存使用状况</td>
-    <td colspan="5">
-<?php
-$tmp = array(
-    'memTotal', 'memUsed', 'memFree', 'memPercent',
-    'memCached', 'memRealPercent',
-    'swapTotal', 'swapUsed', 'swapFree', 'swapPercent'
-);
-foreach ($tmp AS $v) {
-    $sysInfo[$v] = $sysInfo[$v] ? $sysInfo[$v] : 0;
-}
-?>
-          物理内存：共
-          <font color='#CC0000'><?php echo $memTotal;?> </font>
-           , 已用
-          <font color='#CC0000'><span id="UsedMemory"><?php echo $mu;?></span></font>
-          , 空闲
-          <font color='#CC0000'><span id="FreeMemory"><?php echo $mf;?></span></font>
-          , 使用率
-      <span id="memPercent"><?php echo $memPercent;?></span>
-          <div class="bar"><div id="barmemPercent" class="barli_green" style="width:<?php echo $memPercent?>%" >&nbsp;</div> </div>
-<?php
-//判断如果cache为0，不显示
-if($sysInfo['memCached']>0)
-{
-?>
-      Cache化内存为 <span id="CachedMemory"><?php echo $mc;?></span>
-      , 使用率
-          <span id="memCachedPercent"><?php echo $memCachedPercent;?></span>
-      % | Buffers缓冲为  <span id="Buffers"><?php echo $mb;?></span>
-          <div class="bar"><div id="barmemCachedPercent" class="barli_blue" style="width:<?php echo $memCachedPercent?>%" >&nbsp;</div></div>
-
-          真实内存使用
-          <span id="memRealUsed"><?php echo $memRealUsed;?></span>
-      , 真实内存空闲
-          <span id="memRealFree"><?php echo $memRealFree;?></span>
-      , 使用率
-          <span id="memRealPercent"><?php echo $memRealPercent;?></span>
-          %
-          <div class="bar_1"><div id="barmemRealPercent" class="barli_1" style="width:<?php echo $memRealPercent?>%" >&nbsp;</div></div>
-<?php
-}
-//判断如果SWAP区为0，不显示
-if($sysInfo['swapTotal']>0)
-{
-?>
-          SWAP区：共
-          <?php echo $st;?>
-          , 已使用
-          <span id="swapUsed"><?php echo $su;?></span>
-          , 空闲
-          <span id="swapFree"><?php echo $sf;?></span>
-          , 使用率
-          <span id="swapPercent"><?php echo $swapPercent;?></span>
-          %
-          <div class="bar"><div id="barswapPercent" class="barli_red" style="width:<?php echo $swapPercent?>%" >&nbsp;</div> </div>
-
-<?php
-}
-?>
-    </td>
-  </tr>
-  <tr>
-    <td>硬盘使用状况</td>
-    <td colspan="5">
-    总空间 <?php echo $dt;?>&nbsp;G，
-    已用 <font color='#333333'><span id="useSpace"><?php echo $du;?></span></font>&nbsp;G，
-    空闲 <font color='#333333'><span id="freeSpace"><?php echo $df;?></span></font>&nbsp;G，
-    使用率 <span id="hdPercent"><?php echo $hdPercent;?></span>%
-    <div class="bar"><div id="barhdPercent" class="barli_black" style="width:<?php echo $hdPercent;?>%" >&nbsp;</div> </div>
-  </td>
-  </tr>
-    <tr>
-    <td>系统平均负载</td>
-    <td colspan="5" class="w_number"><span id="loadAvg"><?php echo $load;?></span></td>
-  </tr>
-</table>
-
-<?php if (false !== ($strs = @file("/proc/net/dev"))) : ?>
-<table>
-    <tr><th colspan="5">网络使用状况</th></tr>
-<?php for ($i = 2; $i < count($strs); $i++ ) : ?>
-<?php preg_match_all( "/([^\s]+):[\s]{0,}(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/", $strs[$i], $info );?>
-     <tr>
-        <td width="13%"><?php echo $info[1][0]?> : </td>
-        <td width="29%">入网: <font color='#CC0000'><span id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></font></td>
-    <td width="14%">实时: <font color='#CC0000'><span id="NetInputSpeed<?php echo $i?>">0B/s</span></font></td>
-        <td width="29%">出网: <font color='#CC0000'><span id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></font></td>
-    <td width="14%">实时: <font color='#CC0000'><span id="NetOutSpeed<?php echo $i?>">0B/s</span></font></td>
-    </tr>
-<?php endfor; ?>
-</table>
-<?php endif; ?>
-
-<?php if (0 < count($strs = array_splice(@file("/proc/net/arp"), 1))) : ?>
-<table>
-    <tr><th colspan="5">网络邻居</th></tr>
-<?php $seen = array(); ?>
-<?php for ($i = 0; $i < count($strs); $i++ ) : ?>
-<?php $info = preg_split('/\s+/', $strs[$i]); ?>
-<?php if ('0x2' == $info[2] && !isset($seen[$info[3]])) : ?>
-<?php $seen[$info[3]] = true; ?>
-     <tr>
-        <td width="13%"><?php echo $info[0];?> </td>
-        <td width="29%">MAC: <font color='#CC0000'><?php  echo $info[3];?></font></td>
-        <td width="14%">类型: <font color='#CC0000'><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
-        <td width="29%">接口: <font color='#CC0000'><?php echo $info[5];?></font></td>
-    </tr>
-<?php endif; ?>
-<?php endfor; ?>
-</table>
-<?php endif; ?>
-
-<?php
+// 得到当前登录用户
 function get_logon_events()
 {
   $events = array();
@@ -894,87 +546,439 @@ function get_logon_events()
   }
   return $events2;
 }
+
 ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><?php echo $_SERVER['SERVER_NAME']; ?></title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//lib.sinaapp.com/js/bootstrap/v3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<style type="text/css">
+<!--
+.progress-bar-black {
+  background-color: #333;
+}
+.progress {
+  height:10px;
+  width:90%;
+}
+* {
+  font-family: Tahoma, "Microsoft Yahei", Arial;
+}
+-->
+</style>
+<script src="//lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){getData();});
+var OutSpeed2=<?php echo floor($NetOutSpeed[2]) ?>;
+var OutSpeed3=<?php echo floor($NetOutSpeed[3]) ?>;
+var OutSpeed4=<?php echo floor($NetOutSpeed[4]) ?>;
+var OutSpeed5=<?php echo floor($NetOutSpeed[5]) ?>;
+var InputSpeed2=<?php echo floor($NetInputSpeed[2]) ?>;
+var InputSpeed3=<?php echo floor($NetInputSpeed[3]) ?>;
+var InputSpeed4=<?php echo floor($NetInputSpeed[4]) ?>;
+var InputSpeed5=<?php echo floor($NetInputSpeed[5]) ?>;
+function getData()
+{
+  setTimeout("getData()", 1000);
+  $.getJSON('?act=rt&callback=?', displayData);
+}
+function ForDight(Dight,How)
+{
+  if (Dight<0){
+    var Last=0+"B/s";
+  }else if (Dight<1024){
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"B/s";
+  }else if (Dight<1048576){
+    Dight=Dight/1024;
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"K/s";
+  }else{
+    Dight=Dight/1048576;
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"M/s";
+  }
+  return Last;
+}
+function displayData(data)
+{
+  $("#useSpace").html(data.useSpace);
+  $("#freeSpace").html(data.freeSpace);
+  $("#hdPercent").html(data.hdPercent);
+  $("#barhdPercent").width(data.barhdPercent);
+  $("#TotalMemory").html(data.TotalMemory);
+  $("#UsedMemory").html(data.UsedMemory);
+  $("#FreeMemory").html(data.FreeMemory);
+  $("#CachedMemory").html(data.CachedMemory);
+  $("#Buffers").html(data.Buffers);
+  $("#TotalSwap").html(data.TotalSwap);
+  $("#swapUsed").html(data.swapUsed);
+  $("#swapFree").html(data.swapFree);
+  $("#swapPercent").html(data.swapPercent);
+  $("#loadAvg").html(data.loadAvg);
+  $("#uptime").html(data.uptime);
+  $("#freetime").html(data.freetime);
+  $("#stime").html(data.stime);
+  $("#bjtime").html(data.bjtime);
+  $("#memRealUsed").html(data.memRealUsed);
+  $("#memRealFree").html(data.memRealFree);
+  $("#memRealPercent").html(data.memRealPercent);
+  $("#memPercent").html(data.memPercent);
+  $("#barmemPercent").width(data.memPercent);
+  $("#barmemRealPercent").width(data.barmemRealPercent);
+  $("#memCachedPercent").html(data.memCachedPercent);
+  $("#barmemCachedPercent").width(data.barmemCachedPercent);
+  $("#barswapPercent").width(data.barswapPercent);
+  $("#NetOut2").html(data.NetOut2);
+  $("#NetOut3").html(data.NetOut3);
+  $("#NetOut4").html(data.NetOut4);
+  $("#NetOut5").html(data.NetOut5);
+  $("#NetOut6").html(data.NetOut6);
+  $("#NetOut7").html(data.NetOut7);
+  $("#NetOut8").html(data.NetOut8);
+  $("#NetOut9").html(data.NetOut9);
+  $("#NetOut10").html(data.NetOut10);
+  $("#NetInput2").html(data.NetInput2);
+  $("#NetInput3").html(data.NetInput3);
+  $("#NetInput4").html(data.NetInput4);
+  $("#NetInput5").html(data.NetInput5);
+  $("#NetInput6").html(data.NetInput6);
+  $("#NetInput7").html(data.NetInput7);
+  $("#NetInput8").html(data.NetInput8);
+  $("#NetInput9").html(data.NetInput10);
+  $("#NetOutSpeed2").html(ForDight((data.NetOutSpeed2-OutSpeed2),3)); OutSpeed2=data.NetOutSpeed2;
+  $("#NetOutSpeed3").html(ForDight((data.NetOutSpeed3-OutSpeed3),3)); OutSpeed3=data.NetOutSpeed3;
+  $("#NetOutSpeed4").html(ForDight((data.NetOutSpeed4-OutSpeed4),3)); OutSpeed4=data.NetOutSpeed4;
+  $("#NetOutSpeed5").html(ForDight((data.NetOutSpeed5-OutSpeed5),3)); OutSpeed5=data.NetOutSpeed5;
+  $("#NetInputSpeed2").html(ForDight((data.NetInputSpeed2-InputSpeed2),3)); InputSpeed2=data.NetInputSpeed2;
+  $("#NetInputSpeed3").html(ForDight((data.NetInputSpeed3-InputSpeed3),3)); InputSpeed3=data.NetInputSpeed3;
+  $("#NetInputSpeed4").html(ForDight((data.NetInputSpeed4-InputSpeed4),3)); InputSpeed4=data.NetInputSpeed4;
+  $("#NetInputSpeed5").html(ForDight((data.NetInputSpeed5-InputSpeed5),3)); InputSpeed5=data.NetInputSpeed5;
+}
+
+$(document).ready(function(){getCPUData();});
+function getCPUData()
+{
+  setTimeout("getCPUData()", 2000);
+  $.getJSON('?act=cpu&callback=?', function (data) {
+    $("#cpuUSER").html(data.user.toFixed(1));
+    $("#cpuSYS").html(data.sys.toFixed(1));
+    $("#cpuNICE").html(data.nice.toFixed(1));
+    $("#cpuIDLE").html(data.idle.toFixed(1).substring(0,4));
+    $("#cpuIOWAIT").html(data.iowait.toFixed(1));
+    $("#cpuIRQ").html(data.irq.toFixed(1));
+    $("#cpuSOFTIRQ").html(data.softirq.toFixed(1));
+    $("#cpuSTEAL").html(data.steal.toFixed(1));
+
+    usage = 100 - (data.idle+data.iowait);
+    if (usage > 75)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-danger');
+    else if (usage > 50)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-warning');
+    else if (usage > 25)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-info');
+    else
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-success');
+  });
+}
+
+$(document).ready(function(){
+  $.getJSON('?act=iploc&callback=?', function (data) {
+    if (data[1] != null && data[1].substring(0,4) == data[0].substring(0,4)) {
+      $("#iploc").html(data[1] + data[0].replace(/^\S+/, ''));
+    } else {
+      $("#iploc").html(data[0]);
+    }
+  });
+});
+-->
+</script>
+</head>
+
+<body>
+
+<a name="w_top"></a>
+
+<div class="container">
+<table class="table table-striped table-bordered table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>PHP探针</th>
+    <th><a href="/files/">文件下载</a></th>
+    <th><a href="/admin/">路由管理</a></th>
+    <th><a href="/shell/">Shell in a box</a></th>
+  </tr>
+  </thead>
+</table>
+
+<!--服务器相关参数-->
+<table class="table table-striped table-bordered table-hover table-condensed">
+  <thead>
+    <tr>
+      <th colspan="4">服务器参数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>服务器域名/IP地址</td>
+      <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的IP地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>)</td>
+    </tr>
+    <tr>
+      <td>服务器标识</td>
+      <td colspan="3"><?php if($sysInfo['win_n'] != ''){echo $sysInfo['win_n'];}else{echo @php_uname();};?></td>
+    </tr>
+    <tr>
+      <td>服务器操作系统</td>
+      <td><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
+      <td>服务器解译引擎</td>
+      <td><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
+    </tr>
+    <tr>
+      <td>服务器语言</td>
+      <td><?php echo getenv("HTTP_ACCEPT_LANGUAGE");?></td>
+      <td>服务器端口</td>
+      <td><?php echo $_SERVER['SERVER_PORT'];?></td>
+    </tr>
+    <tr>
+      <td>服务器主机名</td>
+      <td><?php if('/'==DIRECTORY_SEPARATOR ){echo $os[1];}else{echo $os[2];} ?></td>
+      <td>管理员邮箱</td>
+      <td><?php echo $_SERVER['SERVER_ADMIN'];?></td>
+    </tr>
+    <tr>
+      <td>探针路径</td>
+      <td colspan="3"><?php echo str_replace('\\','/',__FILE__)?str_replace('\\','/',__FILE__):$_SERVER['SCRIPT_FILENAME'];?></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+  <tr><th colspan="6">服务器实时数据</th></tr>
+  <tr>
+    <td>服务器当前时间</td>
+    <td><span id="stime"><?php echo $stime;?></span></td>
+    <td>服务器已运行时间</td>
+    <td colspan="3"><span id="uptime"><?php echo $uptime;?></span></td>
+  </tr>
+  <tr>
+    <td>CPU型号 [<?php echo $sysInfo['cpu']['num'];?>核]</td>
+    <td colspan="5"><?php echo $sysInfo['cpu']['model'];?></td>
+  </tr>
+<?php if (isset($sysInfo['boardVendor'])) : ?>
+  <tr>
+    <td>主板型号</td>
+    <td><?php echo $sysInfo['boardVendor'] . " " . $sysInfo['boardName'] . " " . $sysInfo['boardVersion'];?></td>
+    <td>主板BIOS</td>
+    <td><?php echo $sysInfo['BIOSVendor'] . " " . $sysInfo['BIOSVersion'] . " " . $sysInfo['BIOSDate'];?></td>
+  </tr>
+<?php endif; ?>
+<?php if (isset($sysInfo['diskModel'])) : ?>
+  <tr>
+    <td>硬盘型号</td>
+    <td colspan="5"><?php echo $sysInfo['diskModel'] . " " . $sysInfo['diskVendor'];?></td>
+  </tr>
+<?php endif; ?>
+  <tr>
+    <td>CPU使用状况</td>
+    <td colspan="5">
+      <font id="cpuUSER" color="#CC0000">0.0</font> user,
+      <font id="cpuSYS" color="#CC0000">0.0</font> sys,
+      <font id="cpuNICE">0.0</font> nice,
+      <font id="cpuIDLE" color="#CC0000">99.9</font> idle,
+      <font id="cpuIOWAIT">0.0</font> iowait,
+      <font id="cpuIRQ">0.0</font> irq,
+      <font id="cpuSOFTIRQ">0.0</font> softirq,
+      <font id="cpuSTEAL">0.0</font> steal
+      <div class="progress"><div id="barcpuPercent" class="progress-bar progress-bar-success" role="progressbar" style="width:1px" >&nbsp;</div></div>
+    </td>
+  </tr>
+  <tr>
+    <td>内存使用状况</td>
+    <td colspan="5">
+<?php
+$tmp = array(
+    'memTotal', 'memUsed', 'memFree', 'memPercent',
+    'memCached', 'memRealPercent',
+    'swapTotal', 'swapUsed', 'swapFree', 'swapPercent'
+);
+foreach ($tmp AS $v) {
+    $sysInfo[$v] = $sysInfo[$v] ? $sysInfo[$v] : 0;
+}
+?>
+          物理内存：共
+          <font color='#CC0000'><?php echo $memTotal;?> </font>
+           , 已用
+          <font color='#CC0000'><span id="UsedMemory"><?php echo $mu;?></span></font>
+          , 空闲
+          <font color='#CC0000'><span id="FreeMemory"><?php echo $mf;?></span></font>
+          , 使用率
+          <span id="memPercent"><?php echo $memPercent;?></span>
+          <div class="progress"><div id="barmemPercent" class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $memPercent?>%" ></div></div>
+<?php
+//判断如果cache为0，不显示
+if($sysInfo['memCached']>0)
+{
+?>
+      Cache化内存为 <span id="CachedMemory"><?php echo $mc;?></span>
+      , 使用率
+          <span id="memCachedPercent"><?php echo $memCachedPercent;?></span>
+      % | Buffers缓冲为  <span id="Buffers"><?php echo $mb;?></span>
+          <div class="progress"><div id="barmemCachedPercent" class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $memCachedPercent?>%" ></div></div>
+
+          真实内存使用
+          <span id="memRealUsed"><?php echo $memRealUsed;?></span>
+      , 真实内存空闲
+          <span id="memRealFree"><?php echo $memRealFree;?></span>
+      , 使用率
+          <span id="memRealPercent"><?php echo $memRealPercent;?></span>
+          %
+          <div class="progress"><div id="barmemRealPercent" class="progress-bar progress-bar-warning" role="progressbar" style="width:<?php echo $memRealPercent?>%" ></div></div>
+<?php
+}
+//判断如果SWAP区为0，不显示
+if($sysInfo['swapTotal']>0)
+{
+?>
+          SWAP区：共
+          <?php echo $st;?>
+          , 已使用
+          <span id="swapUsed"><?php echo $su;?></span>
+          , 空闲
+          <span id="swapFree"><?php echo $sf;?></span>
+          , 使用率
+          <span id="swapPercent"><?php echo $swapPercent;?></span>
+          %
+          <div class="progress"><div id="barswapPercent" class="progress-bar progress-bar-danger" role="progressbar" style="width:<?php echo $swapPercent?>%" ></div> </div>
+
+<?php
+}
+?>
+    </td>
+  </tr>
+  <tr>
+    <td>硬盘使用状况</td>
+    <td colspan="5">
+    总空间 <?php echo $dt;?>&nbsp;G，
+    已用 <font color='#333333'><span id="useSpace"><?php echo $du;?></span></font>&nbsp;G，
+    空闲 <font color='#333333'><span id="freeSpace"><?php echo $df;?></span></font>&nbsp;G，
+    使用率 <span id="hdPercent"><?php echo $hdPercent;?></span>%
+    <div class="progress"><div id="barhdPercent" class="progress-bar progress-bar-black" role="progressbar" style="width:<?php echo $hdPercent?>%" ></div> </div>
+  </td>
+  </tr>
+    <tr>
+    <td>系统平均负载</td>
+    <td colspan="5" style="color: #f800fe;"><span id="loadAvg"><?php echo $load;?></span></td>
+  </tr>
+</table>
+
+<?php if (false !== ($strs = @file("/proc/net/dev"))) : ?>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr><th colspan="5">网络使用状况</th></tr>
+<?php for ($i = 2; $i < count($strs); $i++ ) : ?>
+<?php preg_match_all( "/([^\s]+):[\s]{0,}(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/", $strs[$i], $info );?>
+  <tr>
+    <td width="13%"><?php echo $info[1][0]?> : </td>
+    <td width="29%">入网: <font color='#CC0000'><span id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></font></td>
+    <td width="14%">实时: <font color='#CC0000'><span id="NetInputSpeed<?php echo $i?>">0B/s</span></font></td>
+    <td width="29%">出网: <font color='#CC0000'><span id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></font></td>
+    <td width="14%">实时: <font color='#CC0000'><span id="NetOutSpeed<?php echo $i?>">0B/s</span></font></td>
+  </tr>
+<?php endfor; ?>
+</table>
+<?php endif; ?>
+
+<?php if (0 < count($strs = array_splice(@file("/proc/net/arp"), 1))) : ?>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr><th colspan="5">网络邻居</th></tr>
+<?php $seen = array(); ?>
+<?php for ($i = 0; $i < count($strs); $i++ ) : ?>
+<?php $info = preg_split('/\s+/', $strs[$i]); ?>
+<?php if ('0x2' == $info[2] && !isset($seen[$info[3]])) : ?>
+<?php $seen[$info[3]] = true; ?>
+     <tr>
+        <td><?php echo $info[0];?> </td>
+        <td>MAC: <font color='#CC0000'><?php  echo $info[3];?></font></td>
+        <td>类型: <font color='#CC0000'><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
+        <td>接口: <font color='#CC0000'><?php echo $info[5];?></font></td>
+    </tr>
+<?php endif; ?>
+<?php endfor; ?>
+</table>
+<?php endif; ?>
 
 <?php if (false) : ?>
 <?php if (0 < count(($events = get_logon_events()))) : ?>
-<table>
+<table class="table table-striped table-bordered table-hover table-condensed">
     <tr><th colspan="6">已登录用户</th></tr>
 <?php foreach ($events as $event ) : ?>
      <tr>
-        <td width="15%"><?php echo $event['user'];?></td>
-        <td width="15%">TTY: <font color='#CC0000'><?php echo $event['line'];?></font></td>
-        <td width="25%">源地址: <font color='#CC0000'><?php echo $event['host'];?></font></td>
-        <td width="15%">开始于: <font color='#CC0000'><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></font></td>
-        <td width="15%">空闲: <font color='#CC0000'><?php echo '';?></font></td>
-        <td width="15%">当前命令: <font color='#CC0000'><?php echo $event['pid'];?></font></td>
+        <td><?php echo $event['user'];?></td>
+        <td>TTY: <font color='#CC0000'><?php echo $event['line'];?></font></td>
+        <td>源地址: <font color='#CC0000'><?php echo $event['host'];?></font></td>
+        <td>开始于: <font color='#CC0000'><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></font></td>
+        <td>空闲: <font color='#CC0000'><?php echo '';?></font></td>
+        <td>当前命令: <font color='#CC0000'><?php echo $event['pid'];?></font></td>
     </tr>
 <?php endforeach; ?>
 </table>
 <?php endif; ?>
 <?php endif; ?>
 
-
-<a name="w_performance"></a><a name="bottom"></a>
-<form action="<?php echo $_SERVER['PHP_SELF']."#bottom";?>" method="post">
+<a name="w_performance"></a>
+<form action="<?php echo $_SERVER['PHP_SELF']."#w_performance";?>" method="post">
 <!--服务器性能检测-->
-<table>
+<table class="table table-striped table-bordered table-hover table-condensed">
   <tr><th colspan="5">服务器性能检测</th></tr>
-  <tr align="center">
-    <td width="19%">参照对象</td>
-    <td width="17%">整数运算能力检测<br />(1+1运算300万次)</td>
-    <td width="17%">浮点运算能力检测<br />(圆周率开平方300万次)</td>
-    <td width="17%">数据I/O能力检测<br />(读取10K文件1万次)</td>
-    <td width="30%">CPU信息</td>
+  <tr>
+    <td>参照对象</td>
+    <td>整数运算能力检测<br />(1+1运算300万次)</td>
+    <td>浮点运算能力检测<br />(圆周率开平方300万次)</td>
+    <td>数据I/O能力检测<br />(读取10K文件1万次)</td>
   </tr>
-  <tr align="center">
-    <td align="left">美国 LinodeVPS</td>
+  <tr>
+    <td>4 x Xeon L5520 @ 2.27GHz</td>
     <td>0.357秒</td>
     <td>0.802秒</td>
     <td>0.023秒</td>
-    <td align="left">4 x Xeon L5520 @ 2.27GHz</td>
   </tr>
-  <tr align="center">
-    <td align="left">美国 PhotonVPS.com</td>
+  <tr>
+    <td>8 x Xeon E5520 @ 2.27GHz</td>
     <td>0.431秒</td>
     <td>1.024秒</td>
     <td>0.034秒</td>
-    <td align="left">8 x Xeon E5520 @ 2.27GHz</td>
   </tr>
-  <tr align="center">
-    <td align="left">德国 SpaceRich.com</td>
+  <tr>
+    <td>4 x Core i7 920 @ 2.67GHz</td>
     <td>0.421秒</td>
     <td>1.003秒</td>
     <td>0.038秒</td>
-    <td align="left">4 x Core i7 920 @ 2.67GHz</td>
   </tr>
-  <tr align="center">
-    <td align="left">美国 RiZie.com</td>
+  <tr>
+    <td>2 x Pentium4 3.00GHz</td>
     <td>0.521秒</td>
     <td>1.559秒</td>
     <td>0.054秒</td>
-    <td align="left">2 x Pentium4 3.00GHz</td>
   </tr>
-  <tr align="center">
-    <td align="left">埃及 CitynetHost.com</td>
+  <tr>
+    <td>2 x Core2Duo E4600 @ 2.40GHz</td>
     <td>0.343秒</td>
     <td>0.761秒</td>
     <td>0.023秒</td>
-    <td align="left">2 x Core2Duo E4600 @ 2.40GHz</td>
   </tr>
-  <tr align="center">
-    <td align="left">美国 IXwebhosting.com</td>
+  <tr>
+    <td>4 x Xeon E5530 @ 2.40GHz</td>
     <td>0.535秒</td>
     <td>1.607秒</td>
     <td>0.058秒</td>
-    <td align="left">4 x Xeon E5530 @ 2.40GHz</td>
   </tr>
-  <tr align="center">
+  <tr>
     <td>本台服务器</td>
-    <td><?php echo $valInt;?><br /><input class="btn" name="act" type="submit" value="整型测试" /></td>
-    <td><?php echo $valFloat;?><br /><input class="btn" name="act" type="submit" value="浮点测试" /></td>
-    <td><?php echo $valIo;?><br /><input class="btn" name="act" type="submit" value="IO测试" /></td>
-    <td></td>
+    <td><?php echo $valInt;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="整型测试" /></td>
+    <td><?php echo $valFloat;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="浮点测试" /></td>
+    <td><?php echo $valIo;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="IO测试" /></td>
   </tr>
 </table>
 <input type="hidden" name="pInt" value="<?php echo $valInt;?>" />
@@ -983,189 +987,46 @@ function get_logon_events()
 
 <a name="w_networkspeed"></a>
 <!--网络速度测试-->
-<table>
+<table class="table table-striped table-bordered table-hover table-condensed">
   <tr><th colspan="3">网络速度测试</th></tr>
   <tr>
-    <td width="19%" align="center"><input name="act" type="submit" class="btn" value="开始测试" />
-        <br />
-  向客户端传送1000k字节数据<br />
+  <td width="20%"><input name="act" type="submit" class="btn btn-primary btn-xs" value="开始测试" /><br />
+  向客户端传送1MB字节数据<br />
   带宽比例按理想值计算
   </td>
-    <td width="81%" align="center" >
 
-  <table align="center" width="550" border="0" cellspacing="0" cellpadding="0" >
-    <tr >
-    <td height="15" width="50">带宽</td>
-  <td height="15" width="50">1M</td>
-    <td height="15" width="50">2M</td>
-    <td height="15" width="50">3M</td>
-    <td height="15" width="50">4M</td>
-    <td height="15" width="50">5M</td>
-    <td height="15" width="50">6M</td>
-    <td height="15" width="50">7M</td>
-    <td height="15" width="50">8M</td>
-    <td height="15" width="50">9M</td>
-    <td height="15" width="50">10M</td>
+  <td >
+  <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+    <tr>
+    <td>带宽</td>
+    <td>1M</td>
+    <td>2M</td>
+    <td>3M</td>
+    <td>4M</td>
+    <td>5M</td>
+    <td>6M</td>
+    <td>7M</td>
+    <td>8M</td>
     </tr>
    <tr>
-    <td colspan="11" class="suduk" ><table align="center" width="550" border="0" cellspacing="0" cellpadding="0" height="8" class="suduk">
-    <tr>
-      <td class="sudu"  width="<?php
-  if(preg_match("/[^\d-., ]/",$speed))
-    {
-      echo "0";
-    }
-  else{
-      echo 550*($speed/11000);
-    }
-    ?>"></td>
-      <td class="suduk" width="<?php
-  if(preg_match("/[^\d-., ]/",$speed))
-    {
-      echo "550";
-    }
-  else{
-      echo 550-550*($speed/11000);
-    }
-    ?>"></td>
-    </tr>
-    </table>
+    <td colspan="9">
+    <div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo (isset($_GET['speed']))?($speed/1024/8*100):0; ?>%"></div></div>
    </td>
   </tr>
   </table>
-  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <font color='#cc0000'>".$_GET['speed']."</font> 毫秒，下载速度："."<font color='#cc0000'>".$speed."</font>"." kb/s，需测试多次取平均值，超过10M直接看下载速度":"<font color='#cc0000'>&nbsp;未探测&nbsp;</font>" ?>
-
+  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <font color='#cc0000'>".$_GET['speed']."</font> 毫秒，下载速度："."<font color='#cc0000'>".$speed."</font>"." kb/s，需测试多次取平均值，超过8M直接看下载速度":"<font color='#cc0000'>&nbsp;未探测&nbsp;</font>" ?>
     </td>
   </tr>
 </table>
 </form>
 
-<a name="w_php"></a>
-<table>
-  <tr><th colspan="4">PHP相关参数</th></tr>
+<table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
-    <td width="32%">PHP信息（phpinfo）：</td>
-    <td width="18%">
-    <?php
-    $phpSelf = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
-    $disFuns=get_cfg_var("disable_functions");
-    ?>
-    <?php echo (preg_match("/phpinfo/i",$disFuns))? '<font color="red">×</font>' :"<a href='$phpSelf?act=phpinfo' target='_blank'>PHPINFO</a>";?>
-    </td>
-    <td width="32%">PHP版本（php_version）：</td>
-    <td width="18%"><?php echo PHP_VERSION;?></td>
-  </tr>
-  <tr>
-    <td>PHP运行方式：</td>
-    <td><?php echo strtoupper(php_sapi_name());?></td>
-    <td>脚本占用最大内存（memory_limit）：</td>
-    <td><?php echo show("memory_limit");?></td>
-  </tr>
-  <tr>
-    <td>PHP安全模式（safe_mode）：</td>
-    <td><?php echo show("safe_mode");?></td>
-    <td>POST方法提交最大限制（post_max_size）：</td>
-    <td><?php echo show("post_max_size");?></td>
-  </tr>
-  <tr>
-    <td>上传文件最大限制（upload_max_filesize）：</td>
-    <td><?php echo show("upload_max_filesize");?></td>
-    <td>浮点型数据显示的有效位数（precision）：</td>
-    <td><?php echo show("precision");?></td>
-  </tr>
-  <tr>
-    <td>脚本超时时间（max_execution_time）：</td>
-    <td><?php echo show("max_execution_time");?>秒</td>
-    <td>socket超时时间（default_socket_timeout）：</td>
-    <td><?php echo show("default_socket_timeout");?>秒</td>
-  </tr>
-  <tr>
-    <td>PHP页面根目录（doc_root）：</td>
-    <td><?php echo show("doc_root");?></td>
-    <td>用户根目录（user_dir）：</td>
-    <td><?php echo show("user_dir");?></td>
-  </tr>
-  <tr>
-    <td>dl()函数（enable_dl）：</td>
-    <td><?php echo show("enable_dl");?></td>
-    <td>指定包含文件目录（include_path）：</td>
-    <td><?php echo show("include_path");?></td>
-  </tr>
-  <tr>
-    <td>显示错误信息（display_errors）：</td>
-    <td><?php echo show("display_errors");?></td>
-    <td>自定义全局变量（register_globals）：</td>
-    <td><?php echo show("register_globals");?></td>
-  </tr>
-  <tr>
-    <td>数据反斜杠转义（magic_quotes_gpc）：</td>
-    <td><?php echo show("magic_quotes_gpc");?></td>
-    <td>"&lt;?...?&gt;"短标签（short_open_tag）：</td>
-    <td><?php echo show("short_open_tag");?></td>
-  </tr>
-  <tr>
-    <td>"&lt;% %&gt;"ASP风格标记（asp_tags）：</td>
-    <td><?php echo show("asp_tags");?></td>
-    <td>忽略重复错误信息（ignore_repeated_errors）：</td>
-    <td><?php echo show("ignore_repeated_errors");?></td>
-  </tr>
-  <tr>
-    <td>忽略重复的错误源（ignore_repeated_source）：</td>
-    <td><?php echo show("ignore_repeated_source");?></td>
-    <td>报告内存泄漏（report_memleaks）：</td>
-    <td><?php echo show("report_memleaks");?></td>
-  </tr>
-  <tr>
-    <td>自动字符串转义（magic_quotes_gpc）：</td>
-    <td><?php echo show("magic_quotes_gpc");?></td>
-    <td>外部字符串自动转义（magic_quotes_runtime）：</td>
-    <td><?php echo show("magic_quotes_runtime");?></td>
-  </tr>
-  <tr>
-    <td>打开远程文件（allow_url_fopen）：</td>
-    <td><?php echo show("allow_url_fopen");?></td>
-    <td>声明argv和argc变量（register_argc_argv）：</td>
-    <td><?php echo show("register_argc_argv");?></td>
-  </tr>
-  <tr>
-    <td>Cookie 支持：</td>
-    <td><?php echo isset($_COOKIE)?'<font color="green">√</font>' : '<font color="red">×</font>';?></td>
-    <td>拼写检查（ASpell Library）：</td>
-    <td><?php echo isfun("aspell_check_raw");?></td>
-  </tr>
-   <tr>
-    <td>高精度数学运算（BCMath）：</td>
-    <td><?php echo isfun("bcadd");?></td>
-    <td>PREL相容语法（PCRE）：</td>
-    <td><?php echo isfun("preg_match");?></td>
-   <tr>
-    <td>PDF文档支持：</td>
-    <td><?php echo isfun("pdf_close");?></td>
-    <td>SNMP网络管理协议：</td>
-    <td><?php echo isfun("snmpget");?></td>
-  </tr>
-   <tr>
-    <td>VMailMgr邮件处理：</td>
-    <td><?php echo isfun("vm_adduser");?></td>
-    <td>Curl支持：</td>
-    <td><?php echo isfun("curl_init");?></td>
-  </tr>
-   <tr>
-    <td>SMTP支持：</td>
-    <td><?php echo get_cfg_var("SMTP")?'<font color="green">√</font>' : '<font color="red">×</font>';?></td>
-    <td>SMTP地址：</td>
-    <td><?php echo get_cfg_var("SMTP")?get_cfg_var("SMTP"):'<font color="red">×</font>';?></td>
+    <td><A href="https://github.com/phuslu/cmdhere" target="_blank"><?php echo $title.$version;?></A></td>
+    <td><?php $run_time = sprintf('%0.4f', microtime_float() - $time_start);?>Processed in <?php echo $run_time?> seconds. <?php echo memory_usage();?> memory usage.</td>
+    <td><a href="#w_top">返回顶部</a></td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="w_foot"><A href="https://github.com/phuslu/cmdhere" target="_blank"><?php echo $title.$version;?></A></td>
-    <td class="w_foot"><?php $run_time = sprintf('%0.4f', microtime_float() - $time_start);?>Processed in <?php echo $run_time?> seconds. <?php echo memory_usage();?> memory usage.</td>
-    <td class="w_foot"><a href="#w_top">返回顶部</a></td>
-  </tr>
-</table>
-
+</div>
 </body>
-</html>
-
