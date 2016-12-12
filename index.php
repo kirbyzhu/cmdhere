@@ -559,6 +559,14 @@ function get_logon_events()
 <link href="//lib.sinaapp.com/js/bootstrap/v3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <style type="text/css">
 <!--
+.table-condensed>thead>tr>th,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>tbody>tr>td,
+.table-condensed>tfoot>tr>td {
+    padding: 3px;
+}
 .progress-bar-black {
   background-color: #333;
 }
