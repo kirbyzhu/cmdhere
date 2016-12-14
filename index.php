@@ -495,10 +495,10 @@ if ($_GET['act'] == "iploc")
   {
     array_push($jarr, $matches[1]);
   }
-  preg_match_all("/<td>(.+?)<\/td>/", $result, $matches);
+  preg_match_all('/<div style=".*?color:red;.*?">(.+?)<\/div>/', $result, $matches);
   if (count($matches) > 1)
   {
-    array_push($jarr, end($matches[1]));
+    array_push($jarr, preg_replace('/\s+/', '', end($matches[1])));
   }
 
   $_GET['callback'] = htmlspecialchars($_GET['callback']);
