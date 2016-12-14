@@ -792,10 +792,10 @@ $(document).ready(function(){
   <tr>
     <td>CPU使用状况</td>
     <td colspan="5">
-      <font id="cpuUSER" color="#CC0000">0.0</font> user,
-      <font id="cpuSYS" color="#CC0000">0.0</font> sys,
+      <font id="cpuUSER" class="text-info">0.0</font> user,
+      <font id="cpuSYS" class="text-info">0.0</font> sys,
       <font id="cpuNICE">0.0</font> nice,
-      <font id="cpuIDLE" color="#CC0000">99.9</font> idle,
+      <font id="cpuIDLE" class="text-info">99.9</font> idle,
       <font id="cpuIOWAIT">0.0</font> iowait,
       <font id="cpuIRQ">0.0</font> irq,
       <font id="cpuSOFTIRQ">0.0</font> softirq,
@@ -817,11 +817,11 @@ foreach ($tmp AS $v) {
 }
 ?>
           物理内存：共
-          <font color='#CC0000'><?php echo $memTotal;?> </font>
+          <span class="text-info"><?php echo $memTotal;?> </span>
            , 已用
-          <font color='#CC0000'><span id="UsedMemory"><?php echo $mu;?></span></font>
+          <span id="UsedMemory" class="text-info"><?php echo $mu;?></span>
           , 空闲
-          <font color='#CC0000'><span id="FreeMemory"><?php echo $mf;?></span></font>
+          <span id="FreeMemory" class="text-info"><?php echo $mf;?></span>
           , 使用率
           <span id="memPercent"><?php echo $memPercent;?></span>
           <div class="progress"><div id="barmemPercent" class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $memPercent?>%" ></div></div>
@@ -870,15 +870,15 @@ if($sysInfo['swapTotal']>0)
     <td>硬盘使用状况</td>
     <td colspan="5">
     总空间 <?php echo $dt;?>&nbsp;G，
-    已用 <font color='#333333'><span id="useSpace"><?php echo $du;?></span></font>&nbsp;G，
-    空闲 <font color='#333333'><span id="freeSpace"><?php echo $df;?></span></font>&nbsp;G，
+    已用 <span id="useSpace"><?php echo $du;?></span>&nbsp;G，
+    空闲 <span id="freeSpace"><?php echo $df;?></span>&nbsp;G，
     使用率 <span id="hdPercent"><?php echo $hdPercent;?></span>%
     <div class="progress"><div id="barhdPercent" class="progress-bar progress-bar-black" role="progressbar" style="width:<?php echo $hdPercent?>%" ></div> </div>
   </td>
   </tr>
     <tr>
     <td>系统平均负载</td>
-    <td colspan="5" style="color: #f800fe;"><span id="loadAvg"><?php echo $load;?></span></td>
+    <td colspan="5" class="text-danger"><span id="loadAvg"><?php echo $load;?></span></td>
   </tr>
 </table>
 
@@ -889,10 +889,10 @@ if($sysInfo['swapTotal']>0)
 <?php preg_match_all( "/([^\s]+):[\s]{0,}(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/", $strs[$i], $info );?>
   <tr>
     <td width="13%"><?php echo $info[1][0]?> : </td>
-    <td width="29%">入网: <font color='#CC0000'><span id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></font></td>
-    <td width="14%">实时: <font color='#CC0000'><span id="NetInputSpeed<?php echo $i?>">0B/s</span></font></td>
-    <td width="29%">出网: <font color='#CC0000'><span id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></font></td>
-    <td width="14%">实时: <font color='#CC0000'><span id="NetOutSpeed<?php echo $i?>">0B/s</span></font></td>
+    <td width="29%">入网: <span class="text-info" id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></td>
+    <td width="14%">实时: <span class="text-info" id="NetInputSpeed<?php echo $i?>">0B/s</span></td>
+    <td width="29%">出网: <span class="text-info" id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></td>
+    <td width="14%">实时: <span class="text-info" id="NetOutSpeed<?php echo $i?>">0B/s</span></td>
   </tr>
 <?php endfor; ?>
 </table>
@@ -908,9 +908,9 @@ if($sysInfo['swapTotal']>0)
 <?php $seen[$info[3]] = true; ?>
      <tr>
         <td><?php echo $info[0];?> </td>
-        <td>MAC: <font color='#CC0000'><?php  echo $info[3];?></font></td>
-        <td>类型: <font color='#CC0000'><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
-        <td>接口: <font color='#CC0000'><?php echo $info[5];?></font></td>
+        <td>MAC: <font class="text-info"><?php  echo $info[3];?></font></td>
+        <td>类型: <font class="text-info"><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
+        <td>接口: <font class="text-info"><?php echo $info[5];?></font></td>
     </tr>
 <?php endif; ?>
 <?php endfor; ?>
@@ -924,11 +924,11 @@ if($sysInfo['swapTotal']>0)
 <?php foreach ($events as $event ) : ?>
      <tr>
         <td><?php echo $event['user'];?></td>
-        <td>TTY: <font color='#CC0000'><?php echo $event['line'];?></font></td>
-        <td>源地址: <font color='#CC0000'><?php echo $event['host'];?></font></td>
-        <td>开始于: <font color='#CC0000'><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></font></td>
-        <td>空闲: <font color='#CC0000'><?php echo '';?></font></td>
-        <td>当前命令: <font color='#CC0000'><?php echo $event['pid'];?></font></td>
+        <td>TTY: <font class="text-info"><?php echo $event['line'];?></font></td>
+        <td>源地址: <font class="text-info"><?php echo $event['host'];?></font></td>
+        <td>开始于: <font class="text-info"><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></font></td>
+        <td>空闲: <font class="text-info"><?php echo '';?></font></td>
+        <td>当前命令: <font class="text-info"><?php echo $event['pid'];?></font></td>
     </tr>
 <?php endforeach; ?>
 </table>
@@ -1022,7 +1022,7 @@ if($sysInfo['swapTotal']>0)
    </td>
   </tr>
   </table>
-  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <font color='#cc0000'>".$_GET['speed']."</font> 毫秒，下载速度："."<font color='#cc0000'>".$speed."</font>"." kb/s，需测试多次取平均值，超过8M直接看下载速度":"<font color='#cc0000'>&nbsp;未探测&nbsp;</font>" ?>
+  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <font class='text-info'>".$_GET['speed']."</font> 毫秒，下载速度："."<font class='text-info'>".$speed."</font>"." kb/s，需测试多次取平均值，超过8M直接看下载速度":"<font class='text-info'>&nbsp;未探测&nbsp;</font>" ?>
     </td>
   </tr>
 </table>
