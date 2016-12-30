@@ -7,6 +7,7 @@ import getopt
 import json
 import hashlib
 import email.utils
+import socket
 import urllib2
 import base64
 import logging
@@ -26,9 +27,11 @@ def getip(iface):
 
 
 def getip_from_3322():
-    api_url = 'http://ip.3322.net'
-    resp = urllib2.urlopen(api_url)
-    return resp.read()
+    s = socket.create_connection(('ip.3322.net', 80), 2)
+    s.sendall('GET / HTTP/1.0\r\nHost: ip.3322.net\r\n\r\n')
+    ip = s.recv(1024).splitlines()[-1]
+    s.close()
+    return ip
 
 
 def f3322_ddns(username, password, hostname, ip):
