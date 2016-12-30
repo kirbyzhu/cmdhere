@@ -8,6 +8,7 @@ import json
 import hashlib
 import email.utils
 import urllib2
+import base64
 import logging
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
@@ -22,6 +23,19 @@ def getip(iface):
             ip = line.split()[1].split('/')[0]
             break
     return ip
+
+
+def getip_from_3322():
+    api_url = 'http://ip.3322.net'
+    resp = urllib2.urlopen(api_url)
+    return resp.read()
+
+
+def f3322_ddns(username, password, hostname, ip):
+    api_url = 'http://members.3322.net/dyndns/update?hostname=%s&myip=%s&wildcard=OFF&offline=NO' % (hostname, ip)
+    headers = {'Authorization': 'Basic %s' % base64.b64encode(username+':'+password)}
+    resp = urllib2.urlopen(urllib2.Request(api_url, data=None, headers=headers))
+    logging.info('f3322_ddns hostname=%r to ip=%r result: %s', hostname, ip, resp.read())
 
 
 def cx_ddns(api_key, api_secret, domain, ip=''):
