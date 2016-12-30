@@ -1,4 +1,9 @@
-[[ ${HOME} == /Users/* ]] && alias ls='ls -G' || alias ls='ls -ph --color=auto'
+if [[ ${HOME} == /Users/* ]] ; then
+   #curl -LOJ https://raw.githubusercontent.com/phuslu/cmdhere/master/IR_Black.termina
+   alias ls='ls -G'
+else
+   alias ls='ls -ph --color=auto'
+fi
 alias ll='ls -alFh'
 alias rm='rm -i'
 alias mv='mv -i'
