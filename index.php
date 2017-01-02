@@ -779,7 +779,7 @@ $(document).ready(function(){
   </tr>
   <tr>
     <td>CPU 指令集</td>
-    <td colspan="5" style="word-wrap: break-word;width: 12em;"><?php echo $sysInfo['cpu']['flags'];?></td>
+    <td colspan="5" style="word-wrap: break-word;width: 64em;"><?php echo $sysInfo['cpu']['flags'];?></td>
   </tr>
 <?php if (isset($sysInfo['boardVendor'])) : ?>
   <tr>
