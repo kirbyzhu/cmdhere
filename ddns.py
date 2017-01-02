@@ -14,6 +14,7 @@ import logging
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
+socket.setdefaulttimeout(30)
 
 def getip(iface):
     ip = ''

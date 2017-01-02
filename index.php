@@ -229,6 +229,7 @@ function sys_linux()
   }
   @preg_match_all("/cache\s+size\s{0,}\:+\s{0,}([\d\.]+\s{0,}[A-Z]+[\r\n]+)/", $str, $cache);
   @preg_match_all("/(?i)bogomips\s{0,}\:+\s{0,}([\d\.]+)[\r\n]+/", $str, $bogomips);
+  @preg_match_all("/(?i)(flags|Features)\s{0,}\:+\s{0,}(.+)[\r\n]+/", $str, $flags);
   if (false !== is_array($model[1]))
   {
     $res['cpu']['num'] = sizeof($processor[1]);
@@ -241,6 +242,7 @@ function sys_linux()
       $cache[1][0] = ' | 二级缓存:'.$cache[1][0];
     $bogomips[1][0] = ' | Bogomips:'.$bogomips[1][0];
     $res['cpu']['model'][] = $model[1][0].$mhz[1][0].$cache[1][0].$bogomips[1][0].$x1;
+    $res['cpu']['flags'] = $flags[2][0];
     if (false !== is_array($res['cpu']['model'])) $res['cpu']['model'] = implode("<br />", $res['cpu']['model']);
     if (false !== is_array($res['cpu']['mhz'])) $res['cpu']['mhz'] = implode("<br />", $res['cpu']['mhz']);
     if (false !== is_array($res['cpu']['cache'])) $res['cpu']['cache'] = implode("<br />", $res['cpu']['cache']);
@@ -574,7 +576,7 @@ function get_logon_events()
   height:10px;
   width:90%;
 }
-* {
+body {
   font-family: Tahoma, "Microsoft Yahei", Arial;
 }
 -->
@@ -731,8 +733,8 @@ $(document).ready(function(){
   </thead>
   <tbody>
     <tr>
-      <td>服务器域名/IP地址</td>
-      <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的IP地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>)</td>
+      <td>服务器域名/IP 地址</td>
+      <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的 IP 地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>)</td>
     </tr>
     <tr>
       <td>服务器标识</td>
@@ -772,14 +774,18 @@ $(document).ready(function(){
     <td colspan="3"><span id="uptime"><?php echo $uptime;?></span></td>
   </tr>
   <tr>
-    <td>CPU型号 [<?php echo $sysInfo['cpu']['num'];?>核]</td>
+    <td>CPU 型号 [<?php echo $sysInfo['cpu']['num'];?>核]</td>
     <td colspan="5"><?php echo $sysInfo['cpu']['model'];?></td>
+  </tr>
+  <tr>
+    <td>CPU 指令集</td>
+    <td colspan="5" style="word-wrap: break-word;width: 12em;"><?php echo $sysInfo['cpu']['flags'];?></td>
   </tr>
 <?php if (isset($sysInfo['boardVendor'])) : ?>
   <tr>
     <td>主板型号</td>
     <td><?php echo $sysInfo['boardVendor'] . " " . $sysInfo['boardName'] . " " . $sysInfo['boardVersion'];?></td>
-    <td>主板BIOS</td>
+    <td>主板 BIOS</td>
     <td><?php echo $sysInfo['BIOSVendor'] . " " . $sysInfo['BIOSVersion'] . " " . $sysInfo['BIOSDate'];?></td>
   </tr>
 <?php endif; ?>
@@ -790,7 +796,7 @@ $(document).ready(function(){
   </tr>
 <?php endif; ?>
   <tr>
-    <td>CPU使用状况</td>
+    <td>CPU 使用状况</td>
     <td colspan="5">
       <font id="cpuUSER" class="text-info">0.0</font> user,
       <font id="cpuSYS" class="text-info">0.0</font> sys,
@@ -830,10 +836,10 @@ foreach ($tmp AS $v) {
 if($sysInfo['memCached']>0)
 {
 ?>
-      Cache化内存为 <span id="CachedMemory"><?php echo $mc;?></span>
+      Cache 化内存为 <span id="CachedMemory"><?php echo $mc;?></span>
       , 使用率
           <span id="memCachedPercent"><?php echo $memCachedPercent;?></span>
-      % | Buffers缓冲为  <span id="Buffers"><?php echo $mb;?></span>
+      % | Buffers 缓冲为  <span id="Buffers"><?php echo $mb;?></span>
           <div class="progress"><div id="barmemCachedPercent" class="progress-bar progress-bar-info" role="progressbar" style="width:<?php echo $memCachedPercent?>%" ></div></div>
 
           真实内存使用
@@ -846,11 +852,11 @@ if($sysInfo['memCached']>0)
           <div class="progress"><div id="barmemRealPercent" class="progress-bar progress-bar-warning" role="progressbar" style="width:<?php echo $memRealPercent?>%" ></div></div>
 <?php
 }
-//判断如果SWAP区为0，不显示
+//判断如果 SWAP 区为0，不显示
 if($sysInfo['swapTotal']>0)
 {
 ?>
-          SWAP区：共
+          SWAP 区：共
           <?php echo $st;?>
           , 已使用
           <span id="swapUsed"><?php echo $su;?></span>
@@ -999,7 +1005,7 @@ if($sysInfo['swapTotal']>0)
   <tr><th colspan="3">网络速度测试</th></tr>
   <tr>
   <td width="20%"><input name="act" type="submit" class="btn btn-primary btn-xs" value="开始测试" /><br />
-  向客户端传送1MB字节数据<br />
+  向客户端传送 1MB 字节数据<br />
   带宽比例按理想值计算
   </td>
 
