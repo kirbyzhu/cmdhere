@@ -1,5 +1,5 @@
 if [[ ${HOME} == /Users/* ]] ; then
-   #curl -LOJ https://raw.githubusercontent.com/phuslu/cmdhere/master/IR_Black.termina
+   #curl -LOJ https://raw.githubusercontent.com/phuslu/cmdhere/master/IR_Black.terminal
    alias ls='ls -G'
 else
    alias ls='ls -ph --color=auto'
