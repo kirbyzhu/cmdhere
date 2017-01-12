@@ -8,11 +8,14 @@ alias ll='ls -alFh'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-eval $(SHELL=bash $(type -p dircolors))
-declare PROMPT_COMMAND="history -a;history -r"
-export HISTTIMEFORMAT="%Y-%m-%d %T "
-export HISTCONTROL=ignoredups
+eval $(SHELL=/bin/bash $(type -p dircolors))
 shopt -s checkwinsize
+shopt -s histappend
+export HISTTIMEFORMAT="%Y-%m-%d %T "
+export HISTCONTROL=ignoreboth
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+declare PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 if [[ "xterm-256color xterm screen rxvt cygwin" == *"$TERM"* ]] ; then
     bind '"\e[B": history-search-forward'
