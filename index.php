@@ -1,10 +1,4 @@
 <?php
-if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '' && parse_url($_SERVER['HTTP_REFERER'])['host'] != $_SERVER['HTTP_HOST'])
-{
-   header("location: https://github.com/phuslu");
-   exit(0);
-}
-
 
 //ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 error_reporting(0); //抑制所有错误信息
@@ -716,7 +710,7 @@ $(document).ready(function(){
 <table class="table table-striped table-bordered table-hover table-condensed">
   <thead>
   <tr>
-    <th>PHP探针</th>
+    <th><a href="?act=phpinfo">PHP Info</a></th>
     <th><a href="/files/">文件下载</a></th>
     <th><a href="/admin/">路由管理</a></th>
     <th><a href="/shell/">Shell in a box</a></th>
