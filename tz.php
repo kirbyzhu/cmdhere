@@ -1030,7 +1030,7 @@ if($sysInfo['swapTotal']>0)
 
 <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
-    <td><A href="https://github.com/phuslu/cmdhere" target="_blank"><?php echo $title.$version;?></A></td>
+    <td><?php echo $title.$version;?></A></td>
     <td><?php $run_time = sprintf('%0.4f', microtime_float() - $time_start);?>Processed in <?php echo $run_time?> seconds. <?php echo memory_usage();?> memory usage.</td>
     <td><a href="#w_top">返回顶部</a></td>
   </tr>
