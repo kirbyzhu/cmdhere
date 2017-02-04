@@ -1,4 +1,4 @@
-def getstatusoutput(cmd, timeout=86400*2, callback=None):
+def getstatusoutput(cmd, input='', callback=None, timeout=86400*2):
     """getstatusoutput implemented by subprocess, works with gevent/eventlet. Author: @phuslu, LICENSE: public domain"""
     timeout_at = time.time() + timeout
     interval = 0.1
@@ -13,6 +13,13 @@ def getstatusoutput(cmd, timeout=86400*2, callback=None):
             logging.exception('mktemp %r error: %r', bat, e)
             return 0x7f, str(e)
     pipe = subprocess.Popen(bat or cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=os.name!='nt')
+    if input:
+        try:
+            pipe.stdin.write(input)
+        except IOError as e:
+            if e.errno != errno.EPIPE and e.errno != errno.EINVAL:
+                raise
+        pipe.stdin.close()
     if timeout:
         try:
             pipe_fd = pipe.stdout.fileno()
