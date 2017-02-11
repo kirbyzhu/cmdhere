@@ -24,11 +24,11 @@ RUN \
   wget -O /root/.bashrc https://raw.githubusercontent.com/phuslu/cmdhere/master/.bashrc && \
   wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
   chmod +x /usr/local/bin/dumb-init && \
-  echo '#!/bin/bash\n \
-echo root:Aaa123789 | chpasswd\n \
-/etc/init.d/ssh start\n \
-exec tail -f /dev/null' \
+  echo '#!/bin/bash\n\
+echo root:Aaa123789 | chpasswd\n\
+/etc/init.d/ssh start\n\
+exec tail -f /dev/null'\
   > /run.sh && \
   chmod +x /run.sh
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "/bin/bash", "/run.sh"]
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "/run.sh"]
