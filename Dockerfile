@@ -20,6 +20,11 @@ RUN \
     unzip \
     vim \
     wget \
+    sudo \
+    netcat \
+    socat \
+    screen \
+    tmux \
     openssh-server && \
   echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale && \
   echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
