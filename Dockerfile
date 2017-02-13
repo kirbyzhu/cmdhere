@@ -21,8 +21,9 @@ RUN \
     vim \
     wget \
     openssh-server && \
-  locale-gen --purge en_US.UTF-8 && \
   echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale && \
+  echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
+  dpkg-reconfigure -f noninteractive locales && \
   sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
   sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && \
   sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
