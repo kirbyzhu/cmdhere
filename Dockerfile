@@ -1,7 +1,5 @@
 FROM debian:testing
-
 RUN \
-  export TZ=Asia/Shanghai && \
   export TERM=xterm && \
   export HOME=/root && \
   export DEBIAN_FRONTEND=noninteractive && \
@@ -11,13 +9,17 @@ RUN \
   apt-get install -y \
     software-properties-common \
     locales \
+    anacron \
+    rsyslog \
     logrotate \
+    lsb \
     bash-completion \
     curl \
     git \
     htop \
     make \
     unzip \
+    zip \
     vim \
     wget \
     sudo \
@@ -38,9 +40,11 @@ RUN \
   chmod +x /usr/local/bin/dumb-init && \
   echo root:Aaa123789 | chpasswd && \
   echo '#!/bin/bash\n\
+service rsyslog start\n\
 service cron start\n\
+service anacron start\n\
 service ssh start\n\
-exec -a idle tail -f /dev/null'\
+exec -a /usr/local/bin/dumb-idle tail -f </dev/null'\
   > /run.sh && \
   chmod +x /run.sh
 
