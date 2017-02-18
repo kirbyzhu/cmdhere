@@ -1,10 +1,13 @@
 [default]
 log_level = 2
+daemon_stderr = "/dev/null"
 
 [[http2]]
 listen = ":443"
 server_name = ["phus.lu"]
 proxy_fallback = "http://127.0.0.1:80"
+keyfile = "/home/phuslu/drive/pem/phus.lu.pem"
+certfile = "/home/phuslu/drive/pem/phus.lu.pem"
 
 [[http2]]
 listen = ":443"
