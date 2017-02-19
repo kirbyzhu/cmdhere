@@ -26,6 +26,7 @@ RUN \
     wget \
     sudo \
     netcat \
+    net-tools \
     socat \
     screen \
     tmux \
@@ -49,7 +50,7 @@ service rsyslog start\n\
 service cron start\n\
 service anacron start\n\
 service ssh start\n\
-test -x /data/init.sh && /data/init.sh start\n\
+test -x /home/init.sh && /home/init.sh start\n\
 exec -a /usr/local/bin/dumb-idle tail -f </dev/null'\
   > /run.sh && \
   chmod +x /run.sh
