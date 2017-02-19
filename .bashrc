@@ -10,6 +10,8 @@ alias ll='ls -alFh'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
+alias grep='/usr/bin/env LANG=C grep --color=auto'
+alias ssh='/usr/bin/env LC_ALL=en_US.UTF-8 ssh'
 eval $(SHELL=/bin/bash $(type -p dircolors))
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 export HISTCONTROL=ignoreboth
