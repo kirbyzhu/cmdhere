@@ -13,6 +13,8 @@ grep -q $path /etc/pam.d/sshd || patch -d / -p 0 <<EOF
  @include common-password
 EOF
 
+grep -q "GatewayPorts yes" /etc/ssh/sshd_config || echo "GatewayPorts yes" >> /etc/ssh/sshd_config
+
 if [ "${PAM_USER}" = "rdp" ]; then
     pkill -u "${PAM_USER}"
 fi
