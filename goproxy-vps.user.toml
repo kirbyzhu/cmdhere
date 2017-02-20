@@ -7,21 +7,15 @@ listen = ":443"
 server_name = ["phus.lu", "grafana.phus.lu"]
 proxy_auth_method = "pam"
 proxy_fallback = "http://127.0.0.1:80"
-keyfile = "/home/phuslu/drive/pem/phus.lu.pem"
-certfile = "/home/phuslu/drive/pem/phus.lu.pem"
 
 [[http2]]
 listen = ":443"
 server_name = ["jp.phus.lu"]
 parent_proxy = "https://c1.phus.lu:31150/"
 proxy_auth_method = "pam"
-keyfile = "/home/phuslu/drive/pem/phus.lu.pem"
-certfile = "/home/phuslu/drive/pem/phus.lu.pem"
 
 [[http2]]
 listen = ":443"
 server_name = ["tw.phus.lu"]
 parent_proxy = "http://127.0.0.1:8080"
 proxy_auth_method = "pam"
-keyfile = "/home/phuslu/drive/pem/phus.lu.pem"
-certfile = "/home/phuslu/drive/pem/phus.lu.pem"
