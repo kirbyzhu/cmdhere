@@ -1,6 +1,7 @@
 [default]
 log_level = 2
-daemon_stderr = "/dev/null"
+daemon_stderr = "./goproxy-vps.log"
+autocert_force_rsa = true
 
 [[http2]]
 listen = ":443"
@@ -12,10 +13,14 @@ proxy_fallback = "http://127.0.0.1:80"
 listen = ":443"
 server_name = ["jp.phus.lu"]
 parent_proxy = "https://c1.phus.lu:31150/"
-proxy_auth_method = "pam"
+#proxy_auth_method = "pam"
 
 [[http2]]
 listen = ":443"
 server_name = ["tw.phus.lu"]
 parent_proxy = "http://127.0.0.1:8080"
 proxy_auth_method = "pam"
+
+[http]
+listen = ":9000"
+parent_proxy = "https://c1.phus.lu:31150"
