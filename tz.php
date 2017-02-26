@@ -67,11 +67,11 @@ function show($varName)
   switch($result = get_cfg_var($varName))
   {
     case 0:
-      return '<font color="red">×</font>';
+      return '<span color="red">×</span>';
     break;
 
     case 1:
-      return '<font color="green">√</font>';
+      return '<span color="green">√</span>';
     break;
 
     default:
@@ -106,7 +106,7 @@ elseif($_POST['act'] == "IO测试")
 elseif($_POST['act']=="开始测试")
 {
 ?>
-  <script language="javascript" type="text/javascript">
+  <script>
     var acd1;
     acd1 = new Date();
     acd1ok=acd1.getTime();
@@ -117,7 +117,7 @@ elseif($_POST['act']=="开始测试")
     echo "<!--567890#########0#########0#########0#########0#########0#########0#########0#########012345-->";
   }
   ?>
-  <script language="javascript" type="text/javascript">
+  <script>
     var acd2;
     acd2 = new Date();
     acd2ok=acd2.getTime();
@@ -142,13 +142,13 @@ elseif(isset($_GET['speed']) and $_GET['speed']>0)
 }
 else
 {
-  $speed="<font color=\"red\">&nbsp;未探测&nbsp;</font>";
+  $speed="<span color=\"red\">&nbsp;未探测&nbsp;</span>";
 }
 
 function isfun($funName = '')
 {
   if (!$funName || trim($funName) == '' || preg_match('~[^a-z0-9\_]+~i', $funName, $tmp)) return '错误';
-    return (false !== function_exists($funName)) ? '<font color="green">√</font>' : '<font color="red">×</font>';
+    return (false !== function_exists($funName)) ? '<span color="green">√</span>' : '<span color="red">×</span>';
 }
 
 //整数运算能力测试
@@ -237,10 +237,10 @@ function sys_linux()
     $bogomips[1][0] = ' | Bogomips:'.$bogomips[1][0];
     $res['cpu']['model'][] = $model[1][0].$mhz[1][0].$cache[1][0].$bogomips[1][0].$x1;
     $res['cpu']['flags'] = $flags[2][0];
-    if (false !== is_array($res['cpu']['model'])) $res['cpu']['model'] = implode("<br />", $res['cpu']['model']);
-    if (false !== is_array($res['cpu']['mhz'])) $res['cpu']['mhz'] = implode("<br />", $res['cpu']['mhz']);
-    if (false !== is_array($res['cpu']['cache'])) $res['cpu']['cache'] = implode("<br />", $res['cpu']['cache']);
-    if (false !== is_array($res['cpu']['bogomips'])) $res['cpu']['bogomips'] = implode("<br />", $res['cpu']['bogomips']);
+    if (false !== is_array($res['cpu']['model'])) $res['cpu']['model'] = implode("<br>", $res['cpu']['model']);
+    if (false !== is_array($res['cpu']['mhz'])) $res['cpu']['mhz'] = implode("<br>", $res['cpu']['mhz']);
+    if (false !== is_array($res['cpu']['cache'])) $res['cpu']['cache'] = implode("<br>", $res['cpu']['cache']);
+    if (false !== is_array($res['cpu']['bogomips'])) $res['cpu']['bogomips'] = implode("<br>", $res['cpu']['bogomips']);
   }
 
   // UPTIME
@@ -545,15 +545,13 @@ function get_logon_events()
 
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//lib.sinaapp.com/js/bootstrap/v3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<style type="text/css">
+<meta name="robots" content="noindex, nofollow">
+<title><?php echo $_SERVER['SERVER_NAME']; ?></title>
+<link href="https://lib.sinaapp.com/js/bootstrap/v3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<style>
 <!--
 .table-condensed>thead>tr>th,
 .table-condensed>tbody>tr>th,
@@ -571,12 +569,12 @@ function get_logon_events()
   width:90%;
 }
 body {
-  font-family: Tahoma, "Microsoft Yahei", Arial;
+  font-family: Tahoma, "Microsoft Yahei", Arial, Serif;
 }
 -->
 </style>
-<script src="//lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="https://lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
+<script>
 <!--
 $(document).ready(function(){getData();});
 var OutSpeed2=<?php echo floor($NetOutSpeed[2]) ?>;
@@ -700,80 +698,69 @@ $(document).ready(function(){
 });
 -->
 </script>
-</head>
 
-<body>
-
-<a name="w_top"></a>
+<a id="w_top"></a>
 
 <div class="container">
 <table class="table table-striped table-bordered table-hover table-condensed">
-  <thead>
   <tr>
     <th><a href="?act=phpinfo">PHP Info</a></th>
     <th><a href="/files/">文件下载</a></th>
     <th><a href="/admin/">路由管理</a></th>
     <th><a href="//grafana.<?php echo $_SERVER['SERVER_NAME'];?>/dashboard/db/system-overview">Grafana</a></th>
   </tr>
-  </thead>
 </table>
 
 <!--服务器相关参数-->
 <table class="table table-striped table-bordered table-hover table-condensed">
-  <thead>
-    <tr>
-      <th colspan="4">服务器参数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>服务器域名/IP 地址</td>
-      <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的 IP 地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>)</td>
-    </tr>
-    <tr>
-      <td>服务器标识</td>
-      <td colspan="3"><?php if($sysInfo['win_n'] != ''){echo $sysInfo['win_n'];}else{echo @php_uname();};?></td>
-    </tr>
-    <tr>
-      <td>服务器操作系统</td>
-      <td><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
-      <td>服务器解译引擎</td>
-      <td><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
-    </tr>
-    <tr>
-      <td>服务器语言</td>
-      <td><?php preg_match('/^LANG=(\S+)/m', file_get_contents("/etc/default/locale"), $matches); echo $matches[1]?$matches[1]:(setlocale(LC_CTYPE,0)=='C'?'POSIX':setlocale(LC_CTYPE,0));?></td>
-      <td>服务器端口</td>
-      <td><?php echo $_SERVER['SERVER_PORT'];?></td>
-    </tr>
-    <tr>
-      <td>服务器主机名</td>
-      <td><?php if('/'==DIRECTORY_SEPARATOR ){echo $os[1];}else{echo $os[2];} ?></td>
-      <td>管理员邮箱</td>
-      <td><?php echo $_SERVER['SERVER_ADMIN'];?></td>
-    </tr>
-    <tr>
-      <td>探针路径</td>
-      <td colspan="3"><?php echo str_replace('\\','/',__FILE__)?str_replace('\\','/',__FILE__):$_SERVER['SCRIPT_FILENAME'];?></td>
-    </tr>
-  </tbody>
+  <tr><th colspan="4">服务器参数</th></tr>
+  <tr>
+    <td>服务器域名/IP 地址</td>
+    <td colspan="3"><?php echo @get_current_user();?> - <?php echo $_SERVER['SERVER_NAME'];?>(<?php echo @gethostbyname($_SERVER['SERVER_NAME']); ?>)&nbsp;&nbsp;你的 IP 地址是：<?php echo @$_SERVER['REMOTE_ADDR'];?> (<span id="iploc">未知位置</span>)</td>
+  </tr>
+  <tr>
+    <td>服务器标识</td>
+    <td colspan="3"><?php if($sysInfo['win_n'] != ''){echo $sysInfo['win_n'];}else{echo @php_uname();};?></td>
+  </tr>
+  <tr>
+    <td>服务器操作系统</td>
+    <td><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
+    <td>服务器解译引擎</td>
+    <td><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
+  </tr>
+  <tr>
+    <td>服务器语言</td>
+    <td><?php preg_match('/^LANG=(\S+)/m', file_get_contents("/etc/default/locale"), $matches); echo $matches[1]?$matches[1]:(setlocale(LC_CTYPE,0)=='C'?'POSIX':setlocale(LC_CTYPE,0));?></td>
+    <td>服务器端口</td>
+    <td><?php echo $_SERVER['SERVER_PORT'];?></td>
+  </tr>
+  <tr>
+    <td>服务器主机名</td>
+    <td><?php if('/'==DIRECTORY_SEPARATOR ){echo $os[1];}else{echo $os[2];} ?></td>
+    <td>管理员邮箱</td>
+    <td><?php echo $_SERVER['SERVER_ADMIN'];?></td>
+  </tr>
+  <tr>
+    <td>探针路径</td>
+    <td colspan="3"><?php echo str_replace('\\','/',__FILE__)?str_replace('\\','/',__FILE__):$_SERVER['SCRIPT_FILENAME'];?></td>
+  </tr>
 </table>
 
 <table class="table table-striped table-bordered table-hover table-condensed">
-  <tr><th colspan="6">服务器实时数据</th></tr>
+  <tr><th colspan="4">服务器实时数据</th></tr>
   <tr>
     <td>服务器当前时间</td>
     <td><span id="stime"><?php echo $stime;?></span></td>
     <td>服务器已运行时间</td>
-    <td colspan="3"><span id="uptime"><?php echo $uptime;?></span></td>
+    <td><span id="uptime"><?php echo $uptime;?></span></td>
   </tr>
   <tr>
     <td>CPU 型号 [<?php echo $sysInfo['cpu']['num'];?>核]</td>
-    <td colspan="5"><?php echo $sysInfo['cpu']['model'];?></td>
+    <td colspan="3"><?php echo $sysInfo['cpu']['model'];?></td>
   </tr>
   <tr>
     <td>CPU 指令集</td>
-    <td colspan="5" style="word-wrap: break-word;width: 64em;"><?php echo $sysInfo['cpu']['flags'];?></td>
+    <td colspan="3" style="word-wrap: break-word;width: 64em;"><?php echo $sysInfo['cpu']['flags'];?></td>
   </tr>
 <?php if (isset($sysInfo['boardVendor'])) : ?>
   <tr>
@@ -786,26 +773,26 @@ $(document).ready(function(){
 <?php if (isset($sysInfo['diskModel'])) : ?>
   <tr>
     <td>硬盘型号</td>
-    <td colspan="5"><?php echo $sysInfo['diskModel'] . " " . $sysInfo['diskVendor'];?></td>
+    <td colspan="3"><?php echo $sysInfo['diskModel'] . " " . $sysInfo['diskVendor'];?></td>
   </tr>
 <?php endif; ?>
   <tr>
     <td>CPU 使用状况</td>
-    <td colspan="5">
-      <font id="cpuUSER" class="text-info">0.0</font> user,
-      <font id="cpuSYS" class="text-info">0.0</font> sys,
-      <font id="cpuNICE">0.0</font> nice,
-      <font id="cpuIDLE" class="text-info">99.9</font> idle,
-      <font id="cpuIOWAIT">0.0</font> iowait,
-      <font id="cpuIRQ">0.0</font> irq,
-      <font id="cpuSOFTIRQ">0.0</font> softirq,
-      <font id="cpuSTEAL">0.0</font> steal
+    <td colspan="3">
+      <span id="cpuUSER" class="text-info">0.0</span> user,
+      <span id="cpuSYS" class="text-info">0.0</span> sys,
+      <span id="cpuNICE">0.0</span> nice,
+      <span id="cpuIDLE" class="text-info">99.9</span> idle,
+      <span id="cpuIOWAIT">0.0</span> iowait,
+      <span id="cpuIRQ">0.0</span> irq,
+      <span id="cpuSOFTIRQ">0.0</span> softirq,
+      <span id="cpuSTEAL">0.0</span> steal
       <div class="progress"><div id="barcpuPercent" class="progress-bar progress-bar-success" role="progressbar" style="width:1px" >&nbsp;</div></div>
     </td>
   </tr>
   <tr>
     <td>内存使用状况</td>
-    <td colspan="5">
+    <td colspan="3">
 <?php
 $tmp = array(
     'memTotal', 'memUsed', 'memFree', 'memPercent',
@@ -868,17 +855,17 @@ if($sysInfo['swapTotal']>0)
   </tr>
   <tr>
     <td>硬盘使用状况</td>
-    <td colspan="5">
+    <td colspan="3">
     总空间 <?php echo $dt;?>&nbsp;G，
     已用 <span id="useSpace"><?php echo $du;?></span>&nbsp;G，
     空闲 <span id="freeSpace"><?php echo $df;?></span>&nbsp;G，
     使用率 <span id="hdPercent"><?php echo $hdPercent;?></span>%
     <div class="progress"><div id="barhdPercent" class="progress-bar progress-bar-black" role="progressbar" style="width:<?php echo $hdPercent?>%" ></div> </div>
-  </td>
+    </td>
   </tr>
-    <tr>
+  <tr>
     <td>系统平均负载</td>
-    <td colspan="5" class="text-danger"><span id="loadAvg"><?php echo $load;?></span></td>
+    <td colspan="3" class="text-danger"><span id="loadAvg"><?php echo $load;?></span></td>
   </tr>
 </table>
 
@@ -888,11 +875,11 @@ if($sysInfo['swapTotal']>0)
 <?php for ($i = 2; $i < count($strs); $i++ ) : ?>
 <?php preg_match_all( "/([^\s]+):[\s]{0,}(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/", $strs[$i], $info );?>
   <tr>
-    <td width="13%"><?php echo $info[1][0]?> : </td>
-    <td width="29%">入网: <span class="text-info" id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></td>
-    <td width="14%">实时: <span class="text-info" id="NetInputSpeed<?php echo $i?>">0B/s</span></td>
-    <td width="29%">出网: <span class="text-info" id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></td>
-    <td width="14%">实时: <span class="text-info" id="NetOutSpeed<?php echo $i?>">0B/s</span></td>
+    <td style="width:13%"><?php echo $info[1][0]?> : </td>
+    <td style="width:29%">入网: <span class="text-info" id="NetInput<?php echo $i?>"><?php echo $NetInput[$i]?></span></td>
+    <td style="width:14%">实时: <span class="text-info" id="NetInputSpeed<?php echo $i?>">0B/s</span></td>
+    <td style="width:29%">出网: <span class="text-info" id="NetOut<?php echo $i?>"><?php echo $NetOut[$i]?></span></td>
+    <td style="width:14%">实时: <span class="text-info" id="NetOutSpeed<?php echo $i?>">0B/s</span></td>
   </tr>
 <?php endfor; ?>
 </table>
@@ -900,17 +887,19 @@ if($sysInfo['swapTotal']>0)
 
 <?php if (0 < count($strs = array_splice(@file("/proc/net/arp"), 1))) : ?>
 <table class="table table-striped table-bordered table-hover table-condensed">
-    <tr><th colspan="5">网络邻居</th></tr>
+    <tr>
+      <th colspan="4">网络邻居</th>
+    </tr>
 <?php $seen = array(); ?>
 <?php for ($i = 0; $i < count($strs); $i++ ) : ?>
 <?php $info = preg_split('/\s+/', $strs[$i]); ?>
 <?php if ('0x2' == $info[2] && !isset($seen[$info[3]])) : ?>
 <?php $seen[$info[3]] = true; ?>
-     <tr>
+    <tr>
         <td><?php echo $info[0];?> </td>
-        <td>MAC: <font class="text-info"><?php  echo $info[3];?></font></td>
-        <td>类型: <font class="text-info"><?php echo $info[1]=='0x1'?'ether':$info[1];?></font></td>
-        <td>接口: <font class="text-info"><?php echo $info[5];?></font></td>
+        <td>MAC: <span class="text-info"><?php  echo $info[3];?></span></td>
+        <td>类型: <span class="text-info"><?php echo $info[1]=='0x1'?'ether':$info[1];?></span></td>
+        <td>接口: <span class="text-info"><?php echo $info[5];?></span></td>
     </tr>
 <?php endif; ?>
 <?php endfor; ?>
@@ -924,27 +913,27 @@ if($sysInfo['swapTotal']>0)
 <?php foreach ($events as $event ) : ?>
      <tr>
         <td><?php echo $event['user'];?></td>
-        <td>TTY: <font class="text-info"><?php echo $event['line'];?></font></td>
-        <td>源地址: <font class="text-info"><?php echo $event['host'];?></font></td>
-        <td>开始于: <font class="text-info"><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></font></td>
-        <td>空闲: <font class="text-info"><?php echo '';?></font></td>
-        <td>当前命令: <font class="text-info"><?php echo $event['pid'];?></font></td>
+        <td>TTY: <span class="text-info"><?php echo $event['line'];?></span></td>
+        <td>源地址: <span class="text-info"><?php echo $event['host'];?></span></td>
+        <td>开始于: <span class="text-info"><?php echo gmstrftime('%m-%d %H:%M', $event['gmtime']);?></span></td>
+        <td>空闲: <span class="text-info"><?php echo '';?></span></td>
+        <td>当前命令: <span class="text-info"><?php echo $event['pid'];?></span></td>
     </tr>
 <?php endforeach; ?>
 </table>
 <?php endif; ?>
 <?php endif; ?>
 
-<a name="w_performance"></a>
+<a id="w_performance"></a>
 <form action="<?php echo $_SERVER['PHP_SELF']."#w_performance";?>" method="post">
 <!--服务器性能检测-->
 <table class="table table-striped table-bordered table-hover table-condensed">
-  <tr><th colspan="5">服务器性能检测</th></tr>
+  <tr><th colspan="4">服务器性能检测</th></tr>
   <tr>
     <td>参照对象</td>
-    <td>整数运算能力检测<br />(1+1运算300万次)</td>
-    <td>浮点运算能力检测<br />(圆周率开平方300万次)</td>
-    <td>数据I/O能力检测<br />(读取10K文件1万次)</td>
+    <td>整数运算能力检测<br>(1+1运算300万次)</td>
+    <td>浮点运算能力检测<br>(圆周率开平方300万次)</td>
+    <td>数据I/O能力检测<br>(读取10K文件1万次)</td>
   </tr>
   <tr>
     <td>4 x Xeon L5520 @ 2.27GHz</td>
@@ -984,27 +973,27 @@ if($sysInfo['swapTotal']>0)
   </tr>
   <tr>
     <td>本台服务器</td>
-    <td><?php echo $valInt;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="整型测试" /></td>
-    <td><?php echo $valFloat;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="浮点测试" /></td>
-    <td><?php echo $valIo;?><br /><input class="btn btn-primary btn-xs" name="act" type="submit" value="IO测试" /></td>
+    <td><?php echo $valInt;?><br><input class="btn btn-primary btn-xs" name="act" type="submit" value="整型测试"></td>
+    <td><?php echo $valFloat;?><br><input class="btn btn-primary btn-xs" name="act" type="submit" value="浮点测试"></td>
+    <td><?php echo $valIo;?><br><input class="btn btn-primary btn-xs" name="act" type="submit" value="IO测试"></td>
   </tr>
 </table>
-<input type="hidden" name="pInt" value="<?php echo $valInt;?>" />
-<input type="hidden" name="pFloat" value="<?php echo $valFloat;?>" />
-<input type="hidden" name="pIo" value="<?php echo $valIo;?>" />
+<input type="hidden" name="pInt" value="<?php echo $valInt;?>">
+<input type="hidden" name="pFloat" value="<?php echo $valFloat;?>">
+<input type="hidden" name="pIo" value="<?php echo $valIo;?>">
 
-<a name="w_networkspeed"></a>
+<a id="w_networkspeed"></a>
 <!--网络速度测试-->
 <table class="table table-striped table-bordered table-hover table-condensed">
-  <tr><th colspan="3">网络速度测试</th></tr>
+  <tr><th colspan="2">网络速度测试</th></tr>
   <tr>
-  <td width="20%"><input name="act" type="submit" class="btn btn-primary btn-xs" value="开始测试" /><br />
-  向客户端传送 1MB 字节数据<br />
+  <td style="width:20%"><input name="act" type="submit" class="btn btn-primary btn-xs" value="开始测试"><br>
+  向客户端传送 1MB 字节数据<br>
   带宽比例按理想值计算
   </td>
 
-  <td >
-  <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+  <td>
+  <table style="border-collapse: collapse; width:100%">
     <tr>
     <td>带宽</td>
     <td>1M</td>
@@ -1022,19 +1011,18 @@ if($sysInfo['swapTotal']>0)
    </td>
   </tr>
   </table>
-  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <font class='text-info'>".$_GET['speed']."</font> 毫秒，下载速度："."<font class='text-info'>".$speed."</font>"." kb/s，需测试多次取平均值，超过8M直接看下载速度":"<font class='text-info'>&nbsp;未探测&nbsp;</font>" ?>
-    </td>
+  <?php echo (isset($_GET['speed']))?"下载1000KB数据用时 <span class='text-info'>".$_GET['speed']."</span> 毫秒，下载速度："."<span class='text-info'>".$speed."</span>"." kb/s，需测试多次取平均值，超过8M直接看下载速度":"<span class='text-info'>&nbsp;未探测&nbsp;</span>" ?>
+  </td>
   </tr>
 </table>
 </form>
 
 <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
-    <td><?php echo $title.$version;?></A></td>
+    <td><?php echo $title.$version;?></td>
     <td><?php $run_time = sprintf('%0.4f', microtime_float() - $time_start);?>Processed in <?php echo $run_time?> seconds. <?php echo memory_usage();?> memory usage.</td>
     <td><a href="#w_top">返回顶部</a></td>
   </tr>
 </table>
 
 </div>
-</body>
