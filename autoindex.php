@@ -1,6 +1,8 @@
 <?php
 //var_dump($_SERVER);
 //var_dump($_FILES);
+@ini_set('post_max_size', '64M');
+@ini_set('upload_max_filesize', '64M');
 if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 {
   move_uploaded_file($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
