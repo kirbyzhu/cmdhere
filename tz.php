@@ -550,7 +550,7 @@ function get_logon_events()
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<link href="https://lib.sinaapp.com/js/bootstrap/v3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <style>
 <!--
 .table-condensed>thead>tr>th,
@@ -573,7 +573,7 @@ body {
 }
 -->
 </style>
-<script src="https://lib.sinaapp.com/js/jquery/1.7/jquery.min.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 <!--
 $(document).ready(function(){getData();});
