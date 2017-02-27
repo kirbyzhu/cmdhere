@@ -730,7 +730,7 @@ $(document).ready(function(){
   </tr>
   <tr>
     <td>服务器语言</td>
-    <td><?php preg_match('/^LANG=(\S+)/m', file_get_contents("/etc/default/locale"), $matches); echo $matches[1]?$matches[1]:(setlocale(LC_CTYPE,0)=='C'?'POSIX':setlocale(LC_CTYPE,0));?></td>
+    <td><?php $lc_ctype = setlocale(LC_CTYPE,0); echo $lc_ctype=='C'?'POSIX':$lc_ctype;?></td>
     <td>服务器端口</td>
     <td><?php echo $_SERVER['SERVER_PORT'];?></td>
   </tr>
