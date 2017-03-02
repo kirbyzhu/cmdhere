@@ -80,7 +80,7 @@ foreach ($files as $file)
 </pre>
 <hr>
 <form id="upload" enctype="multipart/form-data" method="POST">
-  <pre><input type="button" style="display:none" id="upload_button" value="Upload File"><span id="upload_name"></span><span id="password0" style="display:none"> <input type="text" id="password" name="password" placeholder="password" ></span></pre>
+  <pre><input type="button" style="display:none" id="upload_button" value="Upload File"><span id="upload_name"></span><span id="password0" style="display:none"> <input type="password" id="password" name="password" placeholder="password" ></span></pre>
   <input type="file" id="photo" name="photo">
   <noscript><input type="submit" value="Upload"></noscript>
 </form>
