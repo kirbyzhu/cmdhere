@@ -46,6 +46,10 @@ function human_filesize($bytes, $decimals = 1) {
   return $hz . ($unit == 'B' ? '' : $unit);
 }
 
+function is_mobile() {
+  return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+
 $files = scandir(dirname($_SERVER['SCRIPT_FILENAME']));
 usort($files, function ($a, $b) {
     $aIsDir = is_dir($a);
@@ -64,7 +68,14 @@ foreach ($files as $file)
 
   $mtime = date("d-M-Y H:i", filemtime($file));
   $fsize = human_filesize(filesize($file));
-  $maxlen1 = 50;
+  if (is_mobile())
+  {
+    $maxlen1 = 22;
+  }
+  else
+  {
+    $maxlen1 = 50;
+  }
   if (strlen($file) > $maxlen1)
   {
     $display_name = substr($file, 0, $maxlen1-4) . "...>";
