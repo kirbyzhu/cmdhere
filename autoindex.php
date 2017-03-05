@@ -1,9 +1,7 @@
 <?php
-define("PASSWORD", "123");
+define("PASSWORD", "abc123");
 //var_dump($_SERVER);
 //var_dump($_FILES);
-@ini_set('post_max_size', '64M');
-@ini_set('upload_max_filesize', '64M');
 if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 {
   if (PASSWORD != "" && $_POST['password'] != PASSWORD)
@@ -12,7 +10,12 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
   }
   else
   {
-    move_uploaded_file($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+    $filename = $_FILES['photo']['name'];
+    if (substr($filename, -4) == '.php')
+    {
+      $filename .= '.txt';
+    }
+    move_uploaded_file($_FILES['photo']['tmp_name'], $filename);
     $scheme = isset($_SERVER['HTTP_X_FORWARDED_PROTO'])?$_SERVER['HTTP_X_FORWARDED_PROTO']:$_SERVER['REQUEST_SCHEME'];
     echo '<!DOCTYPE html><script>location=location.href;</script>Upload Finished.';
   }
@@ -80,7 +83,7 @@ foreach ($files as $file)
 </pre>
 <hr>
 <form id="upload" enctype="multipart/form-data" method="POST">
-  <pre><input type="button" style="display:none" id="upload_button" value="Upload File"><span id="upload_name"></span><span id="password0" style="display:none"> <input type="password" id="password" name="password" placeholder="password" ></span></pre>
+  <pre><input type="submit" style="display:none" id="upload_button" value="Upload File"><span id="upload_name"></span><span id="password0" style="display:none"> <input type="password" id="password" name="password" placeholder="password" ></span></pre>
   <input type="file" id="photo" name="photo">
   <noscript><input type="submit" value="Upload"></noscript>
 </form>
