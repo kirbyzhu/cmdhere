@@ -1,5 +1,5 @@
 <?php
-define("PASSWORD", "abc123");
+define("PASSWORD", "123");
 //var_dump($_SERVER);
 //var_dump($_FILES);
 if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
