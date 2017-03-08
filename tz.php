@@ -6,7 +6,7 @@ error_reporting(0); //抑制所有错误信息
 ob_start();
 date_default_timezone_set('Asia/Shanghai');//此句用于消除时间差
 
-$title = 'PHP探针';
+$title = 'PHP探针(phuslu修改版)';
 $version = "v1.0"; //版本号
 
 define('HTTP_HOST', preg_replace('~^www\.~i', '', $_SERVER['HTTP_HOST']));
