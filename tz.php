@@ -550,7 +550,7 @@ function get_logon_events()
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<link href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" crossorigin="anonymous" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=">
 <style>
 <!--
 .table-condensed>thead>tr>th,
@@ -573,7 +573,7 @@ body {
 }
 -->
 </style>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="></script>
 <script>
 <!--
 $(document).ready(function(){getData();});
