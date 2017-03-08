@@ -6,9 +6,6 @@ error_reporting(0); //抑制所有错误信息
 ob_start();
 date_default_timezone_set('Asia/Shanghai');//此句用于消除时间差
 
-$title = 'PHP探针(phuslu修改版)';
-$version = "v1.0"; //版本号
-
 define('HTTP_HOST', preg_replace('~^www\.~i', '', $_SERVER['HTTP_HOST']));
 
 $_SERVER['REMOTE_ADDR'] = isset($_SERVER["HTTP_X_REAL_IP"])?$_SERVER["HTTP_X_REAL_IP"]:$_SERVER['REMOTE_ADDR'];
@@ -550,7 +547,7 @@ function get_logon_events()
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<link href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" crossorigin="anonymous" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=">
 <style>
 <!--
 .table-condensed>thead>tr>th,
@@ -573,7 +570,7 @@ body {
 }
 -->
 </style>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="></script>
 <script>
 <!--
 $(document).ready(function(){getData();});
@@ -1019,7 +1016,7 @@ if($sysInfo['swapTotal']>0)
 
 <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
-    <td><?php echo $title.$version;?></td>
+    <td>PHP探针(雅黑修改版) v1.0</td>
     <td><?php $run_time = sprintf('%0.4f', microtime_float() - $time_start);?>Processed in <?php echo $run_time?> seconds. <?php echo memory_usage();?> memory usage.</td>
     <td><a href="#w_top">返回顶部</a></td>
   </tr>
