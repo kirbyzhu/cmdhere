@@ -1,12 +1,11 @@
 FROM debian:testing
 RUN \
-  export TERM=xterm && \
-  export HOME=/root && \
   export DEBIAN_FRONTEND=noninteractive && \
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get update -y && \
   apt-get upgrade -y && \
   apt-get install -y \
+    runit-init \
     software-properties-common \
     locales \
     anacron \
@@ -28,10 +27,8 @@ RUN \
     netcat \
     net-tools \
     socat \
-    screen \
-    tmux \
-    autossh \
     pwgen \
+    autossh \
     sshpass \
     openssh-client \
     openssh-server && \
@@ -40,6 +37,7 @@ RUN \
   dpkg-reconfigure -f noninteractive locales && \
   apt-file update && \
   update-command-not-found && \
+  sed -i 's/^exit.*/exit 0/' /usr/sbin/policy-rc.d && \
   sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
   sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && \
   sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
@@ -49,12 +47,14 @@ RUN \
   wget -O /root/.z.sh https://raw.githubusercontent.com/rupa/z/master/z.sh && \
   wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
   chmod +x /usr/local/bin/dumb-init && \
-  echo root:Aaa123789 | chpasswd && \
   echo '#!/bin/bash\n\
 service rsyslog start\n\
 service cron start\n\
 service anacron start\n\
 service ssh start\n\
+if test -n "${GITHUB_USERNAME}"; then\n\
+    ssh-import-id-gh ${GITHUB_USERNAME}\n\
+fi\n\
 if test -n "${PUBLIC_PROXY_PORT}"; then\n\
     (sshpass -p ${PUBLIC_PASSWORD} autossh -M 0 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -NgR ${PUBLIC_PROXY_PORT}:localhost:22 ${PUBLIC_USER}@${PUBLIC_HOST} -p ${PUBLIC_HOST_PORT:-22} &)\n\
 fi\n\
