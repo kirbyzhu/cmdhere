@@ -547,154 +547,6 @@ function get_logon_events()
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title><?php echo $_SERVER['SERVER_NAME']; ?></title>
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" crossorigin="anonymous" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=">
-<style>
-<!--
-.table-condensed>thead>tr>th,
-.table-condensed>tbody>tr>th,
-.table-condensed>tfoot>tr>th,
-.table-condensed>thead>tr>td,
-.table-condensed>tbody>tr>td,
-.table-condensed>tfoot>tr>td {
-    padding: 3px;
-}
-.progress-bar-black {
-  background-color: #333;
-}
-.progress {
-  height:10px;
-  width:90%;
-}
-body {
-  font-family: Tahoma, "Microsoft Yahei", Arial, Serif;
-}
--->
-</style>
-<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="></script>
-<script>
-<!--
-$(document).ready(function(){getData();});
-var OutSpeed2=<?php echo floor($NetOutSpeed[2]) ?>;
-var OutSpeed3=<?php echo floor($NetOutSpeed[3]) ?>;
-var OutSpeed4=<?php echo floor($NetOutSpeed[4]) ?>;
-var OutSpeed5=<?php echo floor($NetOutSpeed[5]) ?>;
-var InputSpeed2=<?php echo floor($NetInputSpeed[2]) ?>;
-var InputSpeed3=<?php echo floor($NetInputSpeed[3]) ?>;
-var InputSpeed4=<?php echo floor($NetInputSpeed[4]) ?>;
-var InputSpeed5=<?php echo floor($NetInputSpeed[5]) ?>;
-function getData()
-{
-  setTimeout("getData()", 1000);
-  $.getJSON('?act=rt&callback=?', displayData);
-}
-function ForDight(Dight,How)
-{
-  if (Dight<0){
-    var Last=0+"B/s";
-  }else if (Dight<1024){
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"B/s";
-  }else if (Dight<1048576){
-    Dight=Dight/1024;
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"K/s";
-  }else{
-    Dight=Dight/1048576;
-    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"M/s";
-  }
-  return Last;
-}
-function displayData(data)
-{
-  $("#useSpace").html(data.useSpace);
-  $("#freeSpace").html(data.freeSpace);
-  $("#hdPercent").html(data.hdPercent);
-  $("#barhdPercent").width(data.barhdPercent);
-  $("#TotalMemory").html(data.TotalMemory);
-  $("#UsedMemory").html(data.UsedMemory);
-  $("#FreeMemory").html(data.FreeMemory);
-  $("#CachedMemory").html(data.CachedMemory);
-  $("#Buffers").html(data.Buffers);
-  $("#TotalSwap").html(data.TotalSwap);
-  $("#swapUsed").html(data.swapUsed);
-  $("#swapFree").html(data.swapFree);
-  $("#swapPercent").html(data.swapPercent);
-  $("#loadAvg").html(data.loadAvg);
-  $("#uptime").html(data.uptime);
-  $("#freetime").html(data.freetime);
-  $("#stime").html(data.stime);
-  $("#bjtime").html(data.bjtime);
-  $("#memRealUsed").html(data.memRealUsed);
-  $("#memRealFree").html(data.memRealFree);
-  $("#memRealPercent").html(data.memRealPercent);
-  $("#memPercent").html(data.memPercent);
-  $("#barmemPercent").width(data.memPercent);
-  $("#barmemRealPercent").width(data.barmemRealPercent);
-  $("#memCachedPercent").html(data.memCachedPercent);
-  $("#barmemCachedPercent").width(data.barmemCachedPercent);
-  $("#barswapPercent").width(data.barswapPercent);
-  $("#NetOut2").html(data.NetOut2);
-  $("#NetOut3").html(data.NetOut3);
-  $("#NetOut4").html(data.NetOut4);
-  $("#NetOut5").html(data.NetOut5);
-  $("#NetOut6").html(data.NetOut6);
-  $("#NetOut7").html(data.NetOut7);
-  $("#NetOut8").html(data.NetOut8);
-  $("#NetOut9").html(data.NetOut9);
-  $("#NetOut10").html(data.NetOut10);
-  $("#NetInput2").html(data.NetInput2);
-  $("#NetInput3").html(data.NetInput3);
-  $("#NetInput4").html(data.NetInput4);
-  $("#NetInput5").html(data.NetInput5);
-  $("#NetInput6").html(data.NetInput6);
-  $("#NetInput7").html(data.NetInput7);
-  $("#NetInput8").html(data.NetInput8);
-  $("#NetInput9").html(data.NetInput10);
-  $("#NetOutSpeed2").html(ForDight((data.NetOutSpeed2-OutSpeed2),3)); OutSpeed2=data.NetOutSpeed2;
-  $("#NetOutSpeed3").html(ForDight((data.NetOutSpeed3-OutSpeed3),3)); OutSpeed3=data.NetOutSpeed3;
-  $("#NetOutSpeed4").html(ForDight((data.NetOutSpeed4-OutSpeed4),3)); OutSpeed4=data.NetOutSpeed4;
-  $("#NetOutSpeed5").html(ForDight((data.NetOutSpeed5-OutSpeed5),3)); OutSpeed5=data.NetOutSpeed5;
-  $("#NetInputSpeed2").html(ForDight((data.NetInputSpeed2-InputSpeed2),3)); InputSpeed2=data.NetInputSpeed2;
-  $("#NetInputSpeed3").html(ForDight((data.NetInputSpeed3-InputSpeed3),3)); InputSpeed3=data.NetInputSpeed3;
-  $("#NetInputSpeed4").html(ForDight((data.NetInputSpeed4-InputSpeed4),3)); InputSpeed4=data.NetInputSpeed4;
-  $("#NetInputSpeed5").html(ForDight((data.NetInputSpeed5-InputSpeed5),3)); InputSpeed5=data.NetInputSpeed5;
-}
-
-$(document).ready(function(){getCPUData();});
-function getCPUData()
-{
-  setTimeout("getCPUData()", 2000);
-  $.getJSON('?act=cpu&callback=?', function (data) {
-    $("#cpuUSER").html(data.user.toFixed(1));
-    $("#cpuSYS").html(data.sys.toFixed(1));
-    $("#cpuNICE").html(data.nice.toFixed(1));
-    $("#cpuIDLE").html(data.idle.toFixed(1).substring(0,4));
-    $("#cpuIOWAIT").html(data.iowait.toFixed(1));
-    $("#cpuIRQ").html(data.irq.toFixed(1));
-    $("#cpuSOFTIRQ").html(data.softirq.toFixed(1));
-    $("#cpuSTEAL").html(data.steal.toFixed(1));
-
-    usage = 100 - (data.idle+data.iowait);
-    if (usage > 75)
-      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-danger');
-    else if (usage > 50)
-      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-warning');
-    else if (usage > 25)
-      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-info');
-    else
-      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-success');
-  });
-}
-
-$(document).ready(function(){
-  $.getJSON('?act=iploc&callback=?', function (data) {
-    if (data[1] != null && data[1].substring(0,4) == data[0].substring(0,4)) {
-      $("#iploc").html(data[1] + data[0].replace(/^\S+/, ''));
-    } else {
-      $("#iploc").html(data[0]);
-    }
-  });
-});
--->
-</script>
 
 <a id="w_top"></a>
 
@@ -703,7 +555,7 @@ $(document).ready(function(){
   <tr>
     <th><a href="?act=phpinfo">PHP Info</a></th>
     <th><a href="/files/">文件下载</a></th>
-    <th><a href="/admin/">路由管理</a></th>
+    <th><a href="/gateway/">网关管理</a></th>
     <th><a href="//grafana.<?php echo $_SERVER['SERVER_NAME'];?>/dashboard/db/system-overview">Grafana</a></th>
   </tr>
 </table>
@@ -1023,3 +875,153 @@ if($sysInfo['swapTotal']>0)
 </table>
 
 </div>
+
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" crossorigin="anonymous" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=">
+<style>
+<!--
+.table-condensed>thead>tr>th,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>tbody>tr>td,
+.table-condensed>tfoot>tr>td {
+    padding: 3px;
+}
+.progress-bar-black {
+  background-color: #333;
+}
+.progress {
+  height:10px;
+  width:90%;
+}
+body {
+  font-family: Tahoma, "Microsoft Yahei", Arial, Serif;
+}
+-->
+</style>
+
+<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="></script>
+<script>
+<!--
+$(document).ready(function(){getData();});
+var OutSpeed2=<?php echo floor($NetOutSpeed[2]) ?>;
+var OutSpeed3=<?php echo floor($NetOutSpeed[3]) ?>;
+var OutSpeed4=<?php echo floor($NetOutSpeed[4]) ?>;
+var OutSpeed5=<?php echo floor($NetOutSpeed[5]) ?>;
+var InputSpeed2=<?php echo floor($NetInputSpeed[2]) ?>;
+var InputSpeed3=<?php echo floor($NetInputSpeed[3]) ?>;
+var InputSpeed4=<?php echo floor($NetInputSpeed[4]) ?>;
+var InputSpeed5=<?php echo floor($NetInputSpeed[5]) ?>;
+function getData()
+{
+  setTimeout("getData()", 1000);
+  $.getJSON('?act=rt&callback=?', displayData);
+}
+function ForDight(Dight,How)
+{
+  if (Dight<0){
+    var Last=0+"B/s";
+  }else if (Dight<1024){
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"B/s";
+  }else if (Dight<1048576){
+    Dight=Dight/1024;
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"K/s";
+  }else{
+    Dight=Dight/1048576;
+    var Last=Math.round(Dight*Math.pow(10,How))/Math.pow(10,How)+"M/s";
+  }
+  return Last;
+}
+function displayData(data)
+{
+  $("#useSpace").html(data.useSpace);
+  $("#freeSpace").html(data.freeSpace);
+  $("#hdPercent").html(data.hdPercent);
+  $("#barhdPercent").width(data.barhdPercent);
+  $("#TotalMemory").html(data.TotalMemory);
+  $("#UsedMemory").html(data.UsedMemory);
+  $("#FreeMemory").html(data.FreeMemory);
+  $("#CachedMemory").html(data.CachedMemory);
+  $("#Buffers").html(data.Buffers);
+  $("#TotalSwap").html(data.TotalSwap);
+  $("#swapUsed").html(data.swapUsed);
+  $("#swapFree").html(data.swapFree);
+  $("#swapPercent").html(data.swapPercent);
+  $("#loadAvg").html(data.loadAvg);
+  $("#uptime").html(data.uptime);
+  $("#freetime").html(data.freetime);
+  $("#stime").html(data.stime);
+  $("#bjtime").html(data.bjtime);
+  $("#memRealUsed").html(data.memRealUsed);
+  $("#memRealFree").html(data.memRealFree);
+  $("#memRealPercent").html(data.memRealPercent);
+  $("#memPercent").html(data.memPercent);
+  $("#barmemPercent").width(data.memPercent);
+  $("#barmemRealPercent").width(data.barmemRealPercent);
+  $("#memCachedPercent").html(data.memCachedPercent);
+  $("#barmemCachedPercent").width(data.barmemCachedPercent);
+  $("#barswapPercent").width(data.barswapPercent);
+  $("#NetOut2").html(data.NetOut2);
+  $("#NetOut3").html(data.NetOut3);
+  $("#NetOut4").html(data.NetOut4);
+  $("#NetOut5").html(data.NetOut5);
+  $("#NetOut6").html(data.NetOut6);
+  $("#NetOut7").html(data.NetOut7);
+  $("#NetOut8").html(data.NetOut8);
+  $("#NetOut9").html(data.NetOut9);
+  $("#NetOut10").html(data.NetOut10);
+  $("#NetInput2").html(data.NetInput2);
+  $("#NetInput3").html(data.NetInput3);
+  $("#NetInput4").html(data.NetInput4);
+  $("#NetInput5").html(data.NetInput5);
+  $("#NetInput6").html(data.NetInput6);
+  $("#NetInput7").html(data.NetInput7);
+  $("#NetInput8").html(data.NetInput8);
+  $("#NetInput9").html(data.NetInput10);
+  $("#NetOutSpeed2").html(ForDight((data.NetOutSpeed2-OutSpeed2),3)); OutSpeed2=data.NetOutSpeed2;
+  $("#NetOutSpeed3").html(ForDight((data.NetOutSpeed3-OutSpeed3),3)); OutSpeed3=data.NetOutSpeed3;
+  $("#NetOutSpeed4").html(ForDight((data.NetOutSpeed4-OutSpeed4),3)); OutSpeed4=data.NetOutSpeed4;
+  $("#NetOutSpeed5").html(ForDight((data.NetOutSpeed5-OutSpeed5),3)); OutSpeed5=data.NetOutSpeed5;
+  $("#NetInputSpeed2").html(ForDight((data.NetInputSpeed2-InputSpeed2),3)); InputSpeed2=data.NetInputSpeed2;
+  $("#NetInputSpeed3").html(ForDight((data.NetInputSpeed3-InputSpeed3),3)); InputSpeed3=data.NetInputSpeed3;
+  $("#NetInputSpeed4").html(ForDight((data.NetInputSpeed4-InputSpeed4),3)); InputSpeed4=data.NetInputSpeed4;
+  $("#NetInputSpeed5").html(ForDight((data.NetInputSpeed5-InputSpeed5),3)); InputSpeed5=data.NetInputSpeed5;
+}
+
+$(document).ready(function(){getCPUData();});
+function getCPUData()
+{
+  setTimeout("getCPUData()", 2000);
+  $.getJSON('?act=cpu&callback=?', function (data) {
+    $("#cpuUSER").html(data.user.toFixed(1));
+    $("#cpuSYS").html(data.sys.toFixed(1));
+    $("#cpuNICE").html(data.nice.toFixed(1));
+    $("#cpuIDLE").html(data.idle.toFixed(1).substring(0,4));
+    $("#cpuIOWAIT").html(data.iowait.toFixed(1));
+    $("#cpuIRQ").html(data.irq.toFixed(1));
+    $("#cpuSOFTIRQ").html(data.softirq.toFixed(1));
+    $("#cpuSTEAL").html(data.steal.toFixed(1));
+
+    usage = 100 - (data.idle+data.iowait);
+    if (usage > 75)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-danger');
+    else if (usage > 50)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-warning');
+    else if (usage > 25)
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-info');
+    else
+      $("#barcpuPercent").width(usage+'%').removeClass().addClass('progress-bar-success');
+  });
+}
+
+$(document).ready(function(){
+  $.getJSON('?act=iploc&callback=?', function (data) {
+    if (data[1] != null && data[1].substring(0,4) == data[0].substring(0,4)) {
+      $("#iploc").html(data[1] + data[0].replace(/^\S+/, ''));
+    } else {
+      $("#iploc").html(data[0]);
+    }
+  });
+});
+-->
+</script>

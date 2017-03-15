@@ -6,7 +6,7 @@ if test "${HOME%/*}" = "/Users" ; then
 else
    alias ls='ls -ph --color=auto'
 fi
-alias ll='ls -alFh'
+alias ll='ls -alF'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
@@ -23,6 +23,7 @@ export PS1='\[\e[01;32m\]\u@\h\[\e[00;33m\] \w \[\e[1;$((31+3*!$?))m\]\$\[\e[00m
 shopt -s checkwinsize
 shopt -s histappend
 
+if test -n "$BASH_VERSION"; then
 if [[ "xterm-256color xterm screen rxvt cygwin" == *"$TERM"* ]] ; then
     bind '"\e[B": history-search-forward'
     bind '"\e[A": history-search-backward'
@@ -44,4 +45,5 @@ if [[ "xterm-256color xterm screen rxvt cygwin" == *"$TERM"* ]] ; then
         #curl -Lf https://raw.githubusercontent.com/rupa/z/master/z.sh >~/.z.sh
         source ~/.z.sh
     fi
+fi
 fi

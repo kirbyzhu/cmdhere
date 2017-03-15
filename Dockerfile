@@ -8,7 +8,6 @@ RUN \
     runit-init \
     software-properties-common \
     locales \
-    anacron \
     rsyslog \
     logrotate \
     lsb \
@@ -32,7 +31,7 @@ RUN \
     sshpass \
     openssh-client \
     openssh-server && \
-  echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale && \
+  echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale && \
   echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
   dpkg-reconfigure -f noninteractive locales && \
   apt-file update && \
@@ -50,7 +49,6 @@ RUN \
   echo '#!/bin/bash\n\
 service rsyslog start\n\
 service cron start\n\
-service anacron start\n\
 service ssh start\n\
 if test -n "${GITHUB_USERNAME}"; then\n\
     ssh-import-id-gh ${GITHUB_USERNAME}\n\

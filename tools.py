@@ -27,11 +27,13 @@ def getip(iface):
     return ip
 
 
+def getip_from_akamai():
+    ip = urllib2.urlopen('http://whatismyip.akamai.com/').read()
+    return ip
+
+
 def getip_from_3322():
-    s = socket.create_connection(('ip.3322.net', 80), 2)
-    s.sendall('GET / HTTP/1.0\r\nHost: ip.3322.net\r\n\r\n')
-    ip = s.recv(1024).splitlines()[-1]
-    s.close()
+    ip = urllib2.urlopen('http://ip.3322.net/').read()
     return ip
 
 
@@ -43,6 +45,11 @@ def f3322_ddns(username, password, hostname, ip):
 
 
 def cx_ddns(api_key, api_secret, domain, ip=''):
+    lip = socket.gethostbyname(domain)
+    rip = getip_from_akamai()
+    if lip == rip:
+        logging.info('remote ip and local ip is same to %s, exit.', lip)
+        return
     api_url = 'https://www.cloudxns.net/api2/ddns'
     data = json.dumps({'domain': domain, 'ip': ip, 'line_id': '1'})
     date = email.utils.formatdate()
