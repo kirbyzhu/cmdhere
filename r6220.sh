@@ -25,5 +25,6 @@ else
         /tmp/root/.local/bin/busybox --install -s /tmp/root/.local/bin
         wget http://phuslu.github.io/mips/bash-mipsel -O /tmp/root/.local/bin/bash
         chmod +x /tmp/root/.local/bin/bash
+        wget http://phuslu.github.io/mips/.bashrc -O /tmp/root/.bashrc
 fi
 
