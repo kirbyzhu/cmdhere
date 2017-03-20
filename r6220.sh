@@ -1,4 +1,5 @@
-# inspired from http://www.right.com.cn/forum/thread-208580-1-1.html
+#!/bin/sh
+# visit http://192.168.1.1/setup.cgi?todo=debug to enable telent
 if test -x /tmp/root/.local/bin/busybox; then
         export TERM=xterm
         export USER=root
@@ -19,12 +20,14 @@ if test -x /tmp/root/.local/bin/busybox; then
                 exec /tmp/root/.local/bin/sh --login
         fi
 else
-        mkdir /tmp/root/.local/bin
-        wget http://phuslu.github.io/mips/busybox-mipsel -O /tmp/root/.local/bin/busybox
-        chmod +x /tmp/root/.local/bin/busybox
-        /tmp/root/.local/bin/busybox --install -s /tmp/root/.local/bin
-        wget http://phuslu.github.io/mips/bash-mipsel -O /tmp/root/.local/bin/bash
-        chmod +x /tmp/root/.local/bin/bash
-        wget http://phuslu.github.io/mips/.bashrc -O /tmp/root/.bashrc
+        mkdir -p /tmp/root/.local/bin
+        cd /tmp/root/.local/bin
+        wget http://phuslu.github.io/mips/busybox-mipsel -O busybox
+        wget http://phuslu.github.io/mips/bash-mipsel -O bash
+        wget http://files.lancethepants.com/Binaries/htop/mipsel/htop%201.0.3/htop
+        wget http://files.lancethepants.com/Binaries/curl/mipsel/curl%207.40.0%20%28MIPSR1%29/curl
+        chmod +x busybox bash htop curl
+        /tmp/root/.local/bin/busybox --install -s .
+        wget http://phuslu.github.io/bashrc -O /tmp/root/.bash_login
 fi
 
