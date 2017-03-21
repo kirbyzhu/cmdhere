@@ -28,6 +28,6 @@ else
     wget http://files.lancethepants.com/Binaries/curl/mipsel/curl%207.40.0%20%28MIPSR1%29/curl
     chmod +x busybox bash htop curl
     $HOME/.local/bin/busybox --install -s .
-    wget http://phuslu.github.io/bashrc -O $HOME/.bash_login
+    wget http://phuslu.github.io/.bashrc -O $HOME/.bash_login
 fi
 
