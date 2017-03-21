@@ -18,8 +18,8 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export PS1='\[\e[01;32m\]\u@\h\[\e[00;33m\] \w \[\e[1;$((31+3*!$?))m\]\$\[\e[00m\] '
 
 if test -n "$BASH_VERSION"; then
-    alias grep='/usr/bin/env LANG=C grep --color=auto'
-    alias ssh='/usr/bin/env LC_ALL=en_US.UTF-8 ssh'
+    alias ssh='LC_ALL=en_US.UTF-8 ssh'
+    test grep --version >/dev/null 2>&1 && alias grep='grep --color'
     eval $(SHELL=/bin/bash $(type -p dircolors))
     shopt -s checkwinsize
     shopt -s histappend
@@ -46,3 +46,4 @@ if test -n "$BASH_VERSION"; then
         fi
     fi
 fi
+
