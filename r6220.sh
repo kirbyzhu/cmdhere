@@ -1,5 +1,8 @@
 #!/bin/sh
-# visit http://192.168.1.1/setup.cgi?todo=debug to enable telent
+# 1. visit below URL to enable telnet
+#    http://192.168.1.1/setup.cgi?todo=debug
+# 2. add below xshell logon script 
+#    test -f /tmp/r6220.sh && exec /tmp/r6220.sh || wget http://phuslu.github.io/mips/r6220.sh -O /tmp/r6220.sh && chmod +x /tmp/r6220.sh
 if test -x /tmp/root/.local/bin/busybox; then
     export TERM=xterm
     export USER=root
