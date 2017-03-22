@@ -1,5 +1,5 @@
 
-# curl -L https://raw.githubusercontent.com/phuslu/cmdhere/master/.bashrc >>~/.bashrc
+# curl phuslu.github.io/bashrc >>~/.bashrc
 if test "${HOME%/*}" = "/Users" ; then
    #curl -LOJ https://raw.githubusercontent.com/phuslu/cmdhere/master/IR_Black.terminal
    alias ls='ls -G'
