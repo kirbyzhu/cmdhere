@@ -63,8 +63,11 @@ usort($files, function ($a, $b) {
 });
 foreach ($files as $file)
 {
-  if ($file[0]== "." || $file == "index.php")
+  if ($file[0] == '.' || $file == 'index.php')
     continue;
+
+  if (strtolower($file) == 'readme.md')
+    $readme = file_get_contents($file);
 
   $mtime = date("d-M-Y H:i", filemtime($file));
   $fsize = human_filesize(filesize($file));
@@ -123,4 +126,11 @@ $("#photo").onchange = function () {
   <?php endif ?>
 };
 </script>
+
+<?php if (isset($readme)) : ?>
+<textarea id="readme_text" style="display:none"><?php echo $readme; ?></textarea>
+<div id="readme"></div>
+<script src="https://cdn.staticfile.org/reveal.js/3.3.0/plugin/markdown/marked.js"></script>
+<script>document.getElementById('readme').innerHTML = marked(document.getElementById('readme_text').value);</script>
+<?php endif; ?>
 
