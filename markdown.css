@@ -263,10 +263,10 @@
     height: auto;
 }
 /* grey out placeholders */
-:-moz-placeholder {
+.markdown-body :-moz-placeholder {
     color: #bfbfbf;
 }
-::-webkit-input-placeholder {
+.markdown-body ::-webkit-input-placeholder {
     color: #bfbfbf;
 }
 .markdown-body input[type=text],
