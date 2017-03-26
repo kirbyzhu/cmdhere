@@ -24,7 +24,7 @@ if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>Index of <?php echo $_SERVER['REQUEST_URI']; ?></title>
-<h1>Index of <?php echo $_SERVER['REQUEST_URI']; ?></h1>
+<h1>Index of <?php echo preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']); ?></h1>
 <hr>
 <pre><a href="../">../</a>
 <?php
