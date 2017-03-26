@@ -129,8 +129,8 @@ $("#photo").onchange = function () {
 
 <?php if (isset($readme)) : ?>
 <textarea id="readme" style="display:none"><?php echo $readme; ?></textarea>
-<link href="https://rawgit.com/phuslu/cmdhere/master/markdown.min.css" rel="stylesheet">
-<div id="readme-markdown" class='markdown-body'></div>
+<link href="https://rawgit.com/phuslu/cmdhere/master/marked.min.css" rel="stylesheet">
+<div id="readme-markdown" class='marked'></div>
 <script src="https://cdn.staticfile.org/reveal.js/3.3.0/plugin/markdown/marked.js"></script>
 <script>document.getElementById('readme-markdown').innerHTML = marked(document.getElementById('readme').value);</script>
 <?php endif; ?>

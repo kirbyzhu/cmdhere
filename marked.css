@@ -1,4 +1,4 @@
-.markdown-body {
+.marked {
     margin: 0 auto;
     font-family: "ubuntu", "Tahoma", "Microsoft YaHei", arial,sans-serif;
     color: #444444;
@@ -6,118 +6,118 @@
     padding: 30px;
 }
 
-.markdown-body img {
+.marked img {
     max-width: 100%;
 }
 @media screen and (min-width: 1000px) {
-    .markdown-body {
+    .marked {
         width: 842px;
         margin: 10px auto;
     }
 }
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4 {
+.marked h1,
+.marked h2,
+.marked h3,
+.marked h4 {
     color: #111111;
     font-weight: 400;
     margin-top: 1em;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5 {
+.marked h1,
+.marked h2,
+.marked h3,
+.marked h4,
+.marked h5 {
 	font-family: Georgia, Palatino, serif;
 }
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body dl{
+.marked h1,
+.marked h2,
+.marked h3,
+.marked h4,
+.marked h5,
+.marked dl{
     margin-bottom: 16px;
     padding: 0;
 }
 
-.markdown-body p {
+.marked p {
     margin-top: 8px;
     margin-bottom: 3px;
 }
-.markdown-body h1 {
+.marked h1 {
     font-size: 48px;
     line-height: 54px;
 }
-.markdown-body h2 {
+.marked h2 {
     font-size: 36px;
     line-height: 42px;
 }
-.markdown-body h1,
-.markdown-body h2 {
+.marked h1,
+.marked h2 {
     border-bottom: 1px solid #EFEAEA;
     padding-bottom: 10px;
 }
-.markdown-body h3 {
+.marked h3 {
     font-size: 24px;
     line-height: 30px;
 }
-.markdown-body h4 {
+.marked h4 {
     font-size: 21px;
     line-height: 26px;
 }
-.markdown-body h5 {
+.marked h5 {
     font-size: 18px;
     line-height: 23px;
 }
-.markdown-body a {
+.marked a {
     color: #0099ff;
     margin: 0 2px;
     padding: 0;
     vertical-align: baseline;
     text-decoration: none;
 }
-.markdown-body a:hover {
+.marked a:hover {
     text-decoration: none;
     color: #ff6600;
 }
-.markdown-body a:visited {
+.marked a:visited {
     /*color: purple;*/
 }
-.markdown-body ul,
-.markdown-body ol {
+.marked ul,
+.marked ol {
     padding: 0;
     padding-left: 18px;
     margin: 0;
 }
-.markdown-body li {
+.marked li {
     line-height: 24px;
 }
-.markdown-body p,
-.markdown-body ul,
-.markdown-body ol {
+.marked p,
+.marked ul,
+.marked ol {
     font-size: 16px;
     line-height: 24px;
 }
 
-.markdown-body ol ol,
-.markdown-body ul ol {
+.marked ol ol,
+.marked ul ol {
     list-style-type: lower-roman;
 }
 
-.markdown-body code,
-.markdown-body pre {
+.marked code,
+.marked pre {
     font-family: Consolas, Monaco, Andale Mono, monospace;
     background-color:#f7f7f7;
     color: inherit;
 }
 
-.markdown-body code {
+.marked code {
     font-family: Consolas, Monaco, Andale Mono, monospace;
     margin: 0 2px;
 }
 
-.markdown-body pre {
+.marked pre {
     font-family: Consolas, Monaco, Andale Mono, monospace;
     line-height: 1.7em;
     overflow: auto;
@@ -125,7 +125,7 @@
     border-left: 5px solid #6CE26C;
 }
 
-.markdown-body pre > code {
+.marked pre > code {
     font-family: Consolas, Monaco, Andale Mono, monospace;
     border: 0;
     display: inline;
@@ -140,33 +140,33 @@
 
 }
 
-.markdown-body code {
+.marked code {
     color: #666555;
 }
 
-.markdown-body aside {
+.marked aside {
     display: block;
     float: right;
     width: 390px;
 }
-.markdown-body blockquote {
+.marked blockquote {
     border-left:.5em solid #eee;
     padding: 0 0 0 2em;
     margin-left:0;
 }
-.markdown-body blockquote cite {
+.marked blockquote cite {
     font-size:14px;
     line-height:20px;
     color:#bfbfbf;
 }
-.markdown-body blockquote cite:before {
+.marked blockquote cite:before {
     content: '\2014 \00A0';
 }
 
-.markdown-body blockquote p {
+.marked blockquote p {
     color: #666;
 }
-.markdown-body hr {
+.marked hr {
     text-align: left;
     color: #999;
     height: 2px;
@@ -176,11 +176,11 @@
     border: 0 none;
 }
 
-.markdown-body dl {
+.marked dl {
     padding: 0;
 }
 
-.markdown-body dl dt {
+.marked dl dt {
     padding: 10px 0;
     margin-top: 16px;
     font-size: 1em;
@@ -188,83 +188,83 @@
     font-weight: bold;
 }
 
-.markdown-body dl dd {
+.marked dl dd {
     padding: 0 16px;
     margin-bottom: 16px;
 }
 
-.markdown-body dd {
+.marked dd {
     margin-left: 0;
 }
 
 /* Code below this line is copyright Twitter Inc. */
 
-.markdown-body button,
-.markdown-body input,
-.markdown-body select,
-.markdown-body textarea {
+.marked button,
+.marked input,
+.marked select,
+.marked textarea {
     font-size: 100%;
     margin: 0;
     vertical-align: baseline;
     *vertical-align: middle;
 }
-.markdown-body button,
-.markdown-body input {
+.marked button,
+.marked input {
     line-height: normal;
     *overflow: visible;
 }
-.markdown-body button::-moz-focus-inner,
-.markdown-body input::-moz-focus-inner {
+.marked button::-moz-focus-inner,
+.marked input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
-.markdown-body button,
-.markdown-body input[type="button"],
-.markdown-body input[type="reset"],
-.markdown-body input[type="submit"] {
+.marked button,
+.marked input[type="button"],
+.marked input[type="reset"],
+.marked input[type="submit"] {
     cursor: pointer;
     -webkit-appearance: button;
 }
-.markdown-body input[type=checkbox],
-.markdown-body input[type=radio] {
+.marked input[type=checkbox],
+.marked input[type=radio] {
     cursor: pointer;
 }
 /* override default chrome & firefox settings */
-.markdown-body input:not([type="image"]),
-.markdown-body textarea {
+.marked input:not([type="image"]),
+.marked textarea {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
 
-.markdown-body input[type="search"] {
+.marked input[type="search"] {
     -webkit-appearance: textfield;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
-.markdown-body input[type="search"]::-webkit-search-decoration {
+.marked input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
-.markdown-body label,
-.markdown-body input,
-.markdown-body select,
-.markdown-body textarea {
+.marked label,
+.marked input,
+.marked select,
+.marked textarea {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
     font-weight: normal;
     line-height: normal;
     margin-bottom: 18px;
 }
-.markdown-body input[type=checkbox],
-.markdown-body input[type=radio] {
+.marked input[type=checkbox],
+.marked input[type=radio] {
     cursor: pointer;
     margin-bottom: 0;
 }
-.markdown-body input[type=text],
-.markdown-body input[type=password],
-.markdown-body textarea,
-.markdown-body select {
+.marked input[type=text],
+.marked input[type=password],
+.marked textarea,
+.marked select {
     display: inline-block;
     width: 210px;
     padding: 4px;
@@ -278,25 +278,25 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.markdown-body select,
-.markdown-body input[type=file] {
+.marked select,
+.marked input[type=file] {
     height: 27px;
     line-height: 27px;
 }
-.markdown-body textarea {
+.marked textarea {
     height: auto;
 }
 /* grey out placeholders */
-.markdown-body :-moz-placeholder {
+.marked :-moz-placeholder {
     color: #bfbfbf;
 }
-.markdown-body ::-webkit-input-placeholder {
+.marked ::-webkit-input-placeholder {
     color: #bfbfbf;
 }
-.markdown-body input[type=text],
-.markdown-body input[type=password],
-.markdown-body select,
-.markdown-body textarea {
+.marked input[type=text],
+.marked input[type=password],
+.marked select,
+.marked textarea {
     -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
     transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -304,9 +304,9 @@
     -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.markdown-body input[type=text]:focus,
-.markdown-body input[type=password]:focus,
-.markdown-body textarea:focus {
+.marked input[type=text]:focus,
+.marked input[type=password]:focus,
+.marked textarea:focus {
     outline: none;
     border-color: rgba(82, 168, 236, 0.8);
     -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
@@ -314,7 +314,7 @@
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
 }
 /* buttons */
-.markdown-body button {
+.marked button {
     display: inline-block;
     padding: 4px 14px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -345,26 +345,26 @@
     border-color: #0064cd #0064cd #003f81;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-.markdown-body button:hover {
+.marked button:hover {
     color: #fff;
     background-position: 0 -15px;
     text-decoration: none;
 }
-.markdown-body button:active {
+.marked button:active {
     -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-.markdown-body button::-moz-focus-inner {
+.marked button::-moz-focus-inner {
     padding: 0;
     border: 0;
 }
-.markdown-body table {
+.marked table {
     *border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
     width: 100%;
 }
-.markdown-body table {
+.marked table {
     border: solid #ccc 1px;
     /*-moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -373,7 +373,7 @@
     -moz-box-shadow: 0 1px 1px #ccc;
     box-shadow: 0 1px 1px #ccc;   */
 }
-.markdown-body table tr:hover {
+.marked table tr:hover {
     background: #fbf8e9;
     -o-transition: all 0.1s ease-in-out;
     -webkit-transition: all 0.1s ease-in-out;
@@ -381,15 +381,15 @@
     -ms-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
 }
-.markdown-body table td,
-.markdown-body .table th {
+.marked table td,
+.marked .table th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
     text-align: left;
 }
 
-.markdown-body table th {
+.marked table th {
     /*background-color: #dce9f9;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
     background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
@@ -406,33 +406,33 @@
     border-left: 1px solid #ccc;
 }
 
-.markdown-body table td:first-child,
-.markdown-body table th:first-child {
+.marked table td:first-child,
+.marked table th:first-child {
     border-left: none;
 }
 
 /*
-.markdown-body table th:first-child {
+.marked table th:first-child {
     -moz-border-radius: 6px 0 0 0;
     -webkit-border-radius: 6px 0 0 0;
     border-radius: 6px 0 0 0;
 }
-.markdown-body table th:last-child {
+.marked table th:last-child {
     -moz-border-radius: 0 6px 0 0;
     -webkit-border-radius: 0 6px 0 0;
     border-radius: 0 6px 0 0;
 }
-.markdown-body table th:only-child{
+.marked table th:only-child{
     -moz-border-radius: 6px 6px 0 0;
     -webkit-border-radius: 6px 6px 0 0;
     border-radius: 6px 6px 0 0;
 }
-.markdown-body table tr:last-child td:first-child {
+.marked table tr:last-child td:first-child {
     -moz-border-radius: 0 0 0 6px;
     -webkit-border-radius: 0 0 0 6px;
     border-radius: 0 0 0 6px;
 }
-.markdown-body table tr:last-child td:last-child {
+.marked table tr:last-child td:last-child {
     -moz-border-radius: 0 0 6px 0;
     -webkit-border-radius: 0 0 6px 0;
     border-radius: 0 0 6px 0;
