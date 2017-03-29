@@ -1,5 +1,7 @@
 <?php
 define("PASSWORD", "123");
+define("MARKED_JS", "https://cdn.bootcss.com/marked/0.3.6/marked.min.js");
+define("GITHUB_MARKDOWN_CSS", "https://cdn.bootcss.com/github-markdown-css/2.4.1/github-markdown.min.css");
 //var_dump($_SERVER);
 //var_dump($_FILES);
 if (isset($_FILES['photo']) && !$_FILES['photo']['error'])
@@ -62,6 +64,9 @@ usort($files, function ($a, $b) {
     elseif (!$aIsDir && $bIsDir)
         return 1; // $b is dir, should be before $a
 });
+
+$marked_js = MARKED_JS;
+$github_markdown_css = GITHUB_MARKDOWN_CSS;
 foreach ($files as $file)
 {
   if ($file[0] == '.' || $file == 'index.php')
@@ -70,8 +75,11 @@ foreach ($files as $file)
   if (strtolower($file) == 'readme.md')
     $readme = file_get_contents($file);
 
-  if ($file == 'marked.min.css')
-    $marked_css = 'marked.min.css';
+  if ($file == 'marked.min.js' || $file == 'marked.js')
+    $marked_js = $file;
+
+  if ($file == 'github-markdown.min.css' || $file == 'github-markdown.css')
+    $github_markdown_css = $file;
 
   $mtime = date("d-M-Y H:i", filemtime($file));
   $is_dir = is_dir($file);
@@ -134,9 +142,9 @@ $("#photo").onchange = function () {
 
 <?php if (isset($readme)) : ?>
 <textarea id="readme" style="display:none"><?php echo $readme; ?></textarea>
-<link href="<?php echo isset($marked_css)?$marked_css:'https://rawgit.com/phuslu/cmdhere/master/marked.min.css'; ?>" rel="stylesheet">
-<div id="readme-markdown" class='marked' style='float:left;' ></div>
-<script src="https://cdn.staticfile.org/reveal.js/3.3.0/plugin/markdown/marked.js"></script>
+<link href="<?php echo $github_markdown_css; ?>" rel="stylesheet">
+<div id="readme-markdown" class='markdown-body' style='float:left;' ></div>
+<script src="<?php echo $marked_js; ?>"></script>
 <script>document.getElementById('readme-markdown').innerHTML = marked(document.getElementById('readme').value);</script>
 <?php endif; ?>
 
