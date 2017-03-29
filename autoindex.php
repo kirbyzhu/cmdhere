@@ -43,6 +43,7 @@ function human_filesize($bytes, $decimals = 1) {
     else if (substr($hz, $pos+1, 1) == '0')
       $hz = substr($hz, 0, -2);
   }
+  $hz = preg_replace('/\\.0+$/', '', $hz);
   return $hz . ($unit == 'B' ? '' : $unit);
 }
 
@@ -69,8 +70,12 @@ foreach ($files as $file)
   if (strtolower($file) == 'readme.md')
     $readme = file_get_contents($file);
 
+  if ($file == 'marked.min.css')
+    $marked_css = 'marked.min.css';
+
   $mtime = date("d-M-Y H:i", filemtime($file));
-  $fsize = human_filesize(filesize($file));
+  $is_dir = is_dir($file);
+  $fsize = $is_dir?'-':human_filesize(filesize($file));
   if (is_mobile())
   {
     $maxlen1 = 22;
@@ -86,7 +91,7 @@ foreach ($files as $file)
   }
   else
   {
-    $display_name = $file . (is_dir($file) ? '/' : '');
+    $display_name = $file . ($is_dir ? '/' : '');
     $pad1 = str_repeat(" ", $maxlen1-strlen($display_name)+1);
   }
   $pad2 = str_repeat(" ", 8-strlen($fsize));
@@ -129,7 +134,7 @@ $("#photo").onchange = function () {
 
 <?php if (isset($readme)) : ?>
 <textarea id="readme" style="display:none"><?php echo $readme; ?></textarea>
-<link href="https://rawgit.com/phuslu/cmdhere/master/marked.min.css" rel="stylesheet">
+<link href="<?php echo isset($marked_css)?$marked_css:'https://rawgit.com/phuslu/cmdhere/master/marked.min.css'; ?>" rel="stylesheet">
 <div id="readme-markdown" class='marked' style='float:left;' ></div>
 <script src="https://cdn.staticfile.org/reveal.js/3.3.0/plugin/markdown/marked.js"></script>
 <script>document.getElementById('readme-markdown').innerHTML = marked(document.getElementById('readme').value);</script>
