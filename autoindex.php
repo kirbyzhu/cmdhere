@@ -143,7 +143,8 @@ $("#photo").onchange = function () {
 <?php if (isset($readme)) : ?>
 <textarea id="readme" style="display:none"><?php echo $readme; ?></textarea>
 <link href="<?php echo $github_markdown_css; ?>" rel="stylesheet">
-<div id="readme-markdown" class='markdown-body' style='float:left;' ></div>
+<style>.markdown-body {float:left;font-family: "ubuntu", "Tahoma", "Microsoft YaHei", arial,sans-serif;}</style>
+<div id="readme-markdown" class='markdown-body'></div>
 <script src="<?php echo $marked_js; ?>"></script>
 <script>document.getElementById('readme-markdown').innerHTML = marked(document.getElementById('readme').value);</script>
 <?php endif; ?>
