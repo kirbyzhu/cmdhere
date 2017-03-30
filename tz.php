@@ -876,7 +876,7 @@ if($sysInfo['swapTotal']>0)
 
 </div>
 
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" crossorigin="anonymous" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <style>
 <!--
 .table-condensed>thead>tr>th,
@@ -900,7 +900,7 @@ body {
 -->
 </style>
 
-<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" crossorigin="anonymous" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
 <!--
 $(document).ready(function(){getData();});
