@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-import sys
-import os
-import getopt
-import json
-import hashlib
-import email.utils
-import socket
-import urllib2
 import base64
+import email.utils
+import getopt
+import hashlib
+import json
 import logging
+import os
+import socket
+import sys
+import telnetlib
+import urllib2
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -80,6 +81,23 @@ def cx_update(api_key, api_secret, domain_id, host, ip):
     return
 
 
+def reboot_r6220(ip, password):
+    request = urllib2.Request('http://%s/setup.cgi?todo=debug' % ip)
+    request.add_header('Authorization', 'Basic %s' % base64.b64encode('admin:%s' % password))
+    resp = urllib2.urlopen(request)
+    logging.info('Enable %s debug return: %s', ip, resp.read())
+    logging.info('Begin telnet %s', ip)
+    t = telnetlib.Telnet(ip, port=23, timeout=10)
+    t.read_until('login:')
+    t.write('root\n')
+    resp = t.read_until('#')
+    logging.info('telnet r6220 return: %s', resp)
+    t.write('reboot\n')
+    resp = t.read_until('#')
+    logging.info('reboot r6220 return: %s', resp)
+    t.close()
+
+
 def main():
     funcs = sorted([v for v in globals().values() if type(v) is type(main) and v is not main])
     if len(sys.argv) == 1:
@@ -103,3 +121,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
