@@ -18,15 +18,19 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 socket.setdefaulttimeout(30)
 
-def getip(iface):
-    ip = ''
+def getip(iface=''):
+    if not iface:
+        sock = socket.socket()
+        sock = socket.socket(type=socket.SOCK_DGRAM)
+        sock.connect(('8.8.8.8', 53))
+        ip = sock.getsockname()[0]
+        sock.close()
+        return ip
     lines = os.popen('ip -o addr show {}'.format(iface)).read().splitlines()
     for line in lines:
         _, name, network, addr = line.strip().split()[:4]
         if network in (('inet', 'inet6')):
-            ip = addr.split('/')[0]
-            break
-    return ip
+            return addr.split('/')[0]
 
 
 def getip_from_akamai():
