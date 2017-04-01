@@ -19,11 +19,11 @@ socket.setdefaulttimeout(30)
 
 def getip(iface):
     ip = ''
-    lines = os.popen('ip addr show {}'.format(iface)).read().splitlines()
+    lines = os.popen('ip -o addr show {}'.format(iface)).read().splitlines()
     for line in lines:
-        line = line.strip()
-        if line.startswith(('inet ', 'inet6 ')):
-            ip = line.split()[1].split('/')[0]
+        _, name, network, addr = line.strip().split()[:4]
+        if network in (('inet', 'inet6')):
+            ip = addr.split('/')[0]
             break
     return ip
 
