@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import socket
+import struct
 import sys
 import telnetlib
 import urllib2
@@ -79,6 +80,25 @@ def cx_update(api_key, api_secret, domain_id, host, ip):
     resp = urllib2.urlopen(request)
     logging.info('cx_update update domain_id=%r host=%r ip=%r result: %r', domain_id, host, ip, resp.read())
     return
+
+
+def wol(mac='18:66:DA:17:A2:95', broadcast='192.168.1.255'):
+    if len(mac) == 12:
+        pass
+    elif len(mac) == 12 + 5:
+        mac = mac.replace(mac[2], '')
+    else:
+        raise ValueError('Incorrect MAC address format')
+    data = ''.join(['FFFFFFFFFFFF', mac * 20])
+    send_data = b''
+    # Split up the hex values and pack.
+    for i in range(0, len(data), 2):
+        send_data = b''.join([send_data, struct.pack('B', int(data[i: i + 2], 16))])
+    # Broadcast it to the LAN.
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    sock.sendto(send_data, (broadcast, 7))
+    logging.info('wol packet sent to MAC=%r', mac)
 
 
 def reboot_r6220(ip, password):
