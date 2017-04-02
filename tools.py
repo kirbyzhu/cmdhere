@@ -12,6 +12,7 @@ import socket
 import struct
 import sys
 import telnetlib
+import time
 import urllib2
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
@@ -108,8 +109,16 @@ def wol(mac='18:66:DA:17:A2:95', broadcast='192.168.1.255'):
 def reboot_r6220(ip, password):
     request = urllib2.Request('http://%s/setup.cgi?todo=debug' % ip)
     request.add_header('Authorization', 'Basic %s' % base64.b64encode('admin:%s' % password))
-    resp = urllib2.urlopen(request)
-    logging.info('Enable %s debug return: %s', ip, resp.read())
+    for _ in xrange(3):
+        try:
+            resp = urllib2.urlopen(request)
+            logging.info('Enable %s debug return: %s', ip, resp.read())
+            break
+        except Exception as e:
+            logging.error('Enable %s debug return: %s', ip, e)
+            time.sleep(1)
+    else:
+        return
     logging.info('Begin telnet %s', ip)
     t = telnetlib.Telnet(ip, port=23, timeout=10)
     t.read_until('login:')
