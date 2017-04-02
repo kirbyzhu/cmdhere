@@ -132,18 +132,19 @@ def reboot_r6220(ip, password):
 
 
 def main():
+    applet = os.path.basename(sys.argv.pop(0))
     funcs = sorted([v for v in globals().values() if type(v) is type(main) and v is not main])
-    if len(sys.argv) == 1:
+    if not sys.argv and applet == 'tools.py':
         params = {f.func_name:f.func_code.co_varnames[:f.func_code.co_argcount] for f in funcs}
-        print 'Usage: {0} command [arguments]\n\nExamples:\n'.format(sys.argv[0]),
-        print '\n'.join('\t{0} {1} {2}'.format(sys.argv[0], k, ' '.join('--{0} {1}'.format(x.replace('_', '-'), x.upper()) for x in v)) for k, v in params.items())
+        print 'Usage: {0} applet [arguments]\n\nExamples:\n'.format(applet)
+        print '\n'.join('\t{0} {1} {2}'.format(applet, k, ' '.join('--{0} {1}'.format(x.replace('_', '-'), x.upper()) for x in v)) for k, v in params.items())
         return
-    command = sys.argv[1]
-    arguments = sys.argv[2:]
+    if applet == 'tools.py':
+        applet = sys.argv.pop(0)
     for f in funcs:
-        if f.func_name == command:
+        if f.func_name == applet:
             options = [x.replace('_','-')+'=' for x in f.func_code.co_varnames[:f.func_code.co_argcount]]
-            kwargs, _ =  getopt.gnu_getopt(arguments, '', options)
+            kwargs, _ =  getopt.gnu_getopt(sys.argv, '', options)
             kwargs = {k[2:].replace('-', '_'):v for k, v in kwargs}
             logging.info('main %s(%s)', f.func_name, kwargs)
             result = f(**kwargs)
