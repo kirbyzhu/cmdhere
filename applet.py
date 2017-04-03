@@ -119,8 +119,16 @@ def reboot_r6220(ip, password):
             time.sleep(1)
     else:
         return
-    logging.info('Begin telnet %s', ip)
-    t = telnetlib.Telnet(ip, port=23, timeout=10)
+    for _ in xrange(3):
+        try:
+            logging.info('Begin telnet %s', ip)
+            t = telnetlib.Telnet(ip, port=23, timeout=10)
+            break
+        except Exception as e:
+            logging.error('telney %s return: %s', ip, e)
+            time.sleep(1)
+    else:
+        return
     t.read_until('login:')
     t.write('root\n')
     resp = t.read_until('#')
