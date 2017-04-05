@@ -21,6 +21,7 @@ RUN \
   touch /var/log/lastlog && \
   sed -i 's#root:/bin/ash#root:/bin/bash#' /etc/passwd && \
   # hack openrc for docker
+  echo 'null::respawn:/usr/bin/tail -f /dev/null' >> /etc/inittab && \
   sed -i '/tty/d' /etc/inittab && \
   sed -i 's/#rc_sys=""/rc_sys="docker"/g' /etc/rc.conf && \
   echo 'rc_provide="loopback net"' >> /etc/rc.conf && \
@@ -33,15 +34,10 @@ RUN \
         /etc/init.d/modules \
         /etc/init.d/modules-load \
         /etc/init.d/modloop && \
-  echo 'null::respawn:/run.sh' >> /etc/inittab && \
-  # add /run.sh for services
-  echo -e '#!/bin/ash\n\
-/etc/init.d/rsyslog start\n\
-/etc/init.d/dcron start\n\
-/etc/init.d/dropbear start\n\
-exec tail -f /dev/null'\
-  > /run.sh && \
-  chmod +x /run.sh && \
+  # add auto-start services
+  rc-update add rsyslog default && \
+  rc-update add dcron default && \
+  rc-update add dropbear default && \
   # set root password
   echo root:toor | chpasswd
 
