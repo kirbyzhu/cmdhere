@@ -20,6 +20,8 @@ RUN \
   curl https://phuslu.github.io/bashrc >/root/.profile  && \
   touch /var/log/lastlog && \
   sed -i 's#root:/bin/ash#root:/bin/bash#' /etc/passwd && \
+  # hack for golang
+  mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
   # hack openrc for docker
   echo 'null::respawn:/usr/bin/tail -f /dev/null' >> /etc/inittab && \
   sed -i '/tty/d' /etc/inittab && \
