@@ -41,7 +41,7 @@ RUN \
   rc-update add rsyslog default && \
   rc-update add dcron default && \
   rc-update add dropbear default && \
-  # set root password
+  # set root password for ssh
   echo root:toor | chpasswd
 
 CMD ["/sbin/init"]

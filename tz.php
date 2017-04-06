@@ -573,7 +573,7 @@ function get_logon_events()
   </tr>
   <tr>
     <td>服务器操作系统</td>
-    <td><?php $release_info = @parse_ini_file(glob("/etc/*release")[0]); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
+    <td><?php $release_info = @parse_ini_file(@array_pop(glob("/etc/*release"))); echo isset($release_info["DISTRIB_DESCRIPTION"])?$release_info["DISTRIB_DESCRIPTION"]:(isset($release_info["PRETTY_NAME"])?$release_info["PRETTY_NAME"]:php_uname('s').' '.php_uname('r'));?> &nbsp;内核版本：<?php if('/'==DIRECTORY_SEPARATOR){$os = explode(' ',php_uname()); echo $os[2];}else{echo $os[1];} ?></td>
     <td>服务器解译引擎</td>
     <td><?php echo $_SERVER['SERVER_SOFTWARE'];?></td>
   </tr>
@@ -1024,15 +1024,4 @@ $(document).ready(function(){
   });
 });
 -->
-</script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-96934761-1', 'auto');
-  ga('send', 'pageview');
-
 </script>
