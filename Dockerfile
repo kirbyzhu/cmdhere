@@ -7,7 +7,8 @@ RUN \
     curl \
     dcron \
     dropbear \
-    htop \
+    shadow \
+    procps \
     logrotate \
     openrc \
     openssh-client \
