@@ -29,6 +29,10 @@ if test -n "$BASH_VERSION"; then
         set bell-style none
         set show-all-if-ambiguous on
         set completion-ignore-case on
+        if [ -f /usr/share/bash-completion/bash_completion ]; then
+            #sudo apt install -y bash-completion
+            source /usr/share/bash-completion/bash_completion
+        fi
         if [ -f ~/.git-completion.bash ]; then
             #curl -Lf https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash >~/.git-completion.bash
             source ~/.git-completion.bash

@@ -6,7 +6,7 @@ daemon_stderr = "./goproxy-vps.log"
 [[http2]]
 listen = ":443"
 server_name = ["phus.lu", "grafana.phus.lu"]
-proxy_auth_method = "pam"
+proxy_auth_method = "htpasswd"
 proxy_fallback = "http://127.0.0.1:80"
 
 [[http2]]
